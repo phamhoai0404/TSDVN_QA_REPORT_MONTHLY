@@ -260,16 +260,47 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
                     itemErr.cusCode = listData[indexCheck].cusCode;
                 }
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "ActionFileError", ex.Message);
+            }
+        }
+
+        public static string GetTSB(List<DataFirst> listData, List<DataError> listError, ref List<DataTSB> listTSB)
+        {
+            try
+            {
+                var listChildData = listData.Where(x => x.cusCode.Equals("TSB")).ToList();
+                var listChildErr = listError.Where(x => x.cusCode.Equals("TSB")).ToList();
+
+                //Phan lay du lieu cua model xong roi
+                foreach (var item in listChildData.ToArray())
+                {
+                    string tempModel = item.model.Substring(0, 9);
+                    var check = listTSB.FirstOrDefault(p => p.item.Equals(tempModel));
+                    if(check != null)
+                    {
+                        continue;
+                    }
+
+                    long qtySum = listChildData.Where(p => p.model.Substring(0, 9) == tempModel).Sum(p=>p.qty);
+
+                    listTSB.Add(new DataTSB(tempModel, item.cusDetail.Substring(1, 13), qtySum));
+                }
+
+                foreach (var item in listChildErr)
+                {
+                    string tempModel = item.model.Substring(0, 9);
+                    
+                }
 
                 return RESULT.OK;
             }
-            //catch (Exception ex)
-            //{
-            //    return string.Format(RESULT.ERROR_015_CATCH, "ActionFileError", ex.Message);
-            //}
-            finally
+            catch (Exception ex)
             {
-
+                return string.Format(RESULT.ERROR_015_CATCH, "GetTSB", ex.Message);
             }
         }
     }

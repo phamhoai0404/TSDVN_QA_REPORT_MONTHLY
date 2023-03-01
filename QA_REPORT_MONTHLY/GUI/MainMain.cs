@@ -141,10 +141,18 @@ namespace GUI
                     MessageBox.Show(resultValue, "Get File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string k = "10";
+                //string k = "10";
 
-
-
+                List<DataTSB> listTSB = new List<DataTSB>();
+                if(this.chkTSB.Checked == true)
+                {
+                    resultValue = Action1.GetTSB(listData, listError, ref listTSB);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Action TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
 
 
 

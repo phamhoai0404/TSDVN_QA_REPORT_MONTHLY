@@ -64,6 +64,7 @@
     <Compile Include="MODEL\DataConfig.cs" />
     <Compile Include="MODEL\DataError.cs" />
     <Compile Include="MODEL\DataFirst.cs" />
+    <Compile Include="MODEL\DataTSB.cs" />
     <Compile Include="MODEL\Enum.cs" />
     <Compile Include="MODEL\RESULT.cs" />
     <Compile Include="Program.cs" />
