@@ -21,6 +21,7 @@ namespace GUI
         }
         ActionInput1 inputAction1 = new ActionInput1();
         List<DataFirst> listData = new List<DataFirst>();
+        List<DataError> listError = new List<DataError>();
 
         #region Action Style
         /// <summary>
@@ -90,8 +91,10 @@ namespace GUI
             DataConfig.CONFIG_SOURCE_FILE_DATA = getConfig["SourceFileData"].ToString();
             DataConfig.CONFIG_SOURCE_FILE_ERROR = getConfig["SourceFileError"].ToString();
             DataConfig.CONFIG_FILE_ERROR_SHEETNAME = getConfig["FileError_SheetName"].ToString();
+            DataConfig.CONFIG_FILE_ERROR_PASSWORD = getConfig["FileError_Password"].ToString();
 
-            DataConfig.CONFIG_MONTH = DateTime.Now.ToString("MM");
+            //DataConfig.CONFIG_MONTH = DateTime.Now.ToString("MM");
+            DataConfig.CONFIG_MONTH = "02";
         }
 
         private void btnActionMain_Click(object sender, EventArgs e)
@@ -112,14 +115,35 @@ namespace GUI
                 }
                 string sheetName = this.inputAction1.monthString + "." + DateTime.Now.ToString("yyyy");
 
+                this.updateLable("Lấy dữ liệu file data...");
                 this.listData.Clear();
-                resultValue = Action1.OpenFileExcel(this.inputAction1, sheetName, ref listData);
+                resultValue = Action1.OpenFileExcelData(this.inputAction1, sheetName, ref listData);
                 if (!resultValue.Equals(RESULT.OK))
                 {
                     MessageBox.Show(resultValue, "Get Data File", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                this.updateLable("Lấy dữ liệu file lỗi.....");
+                this.listError.Clear();
+                resultValue = Action1.OpenFileExcelError(this.inputAction1, ref this.listError);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Get File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                this.updateLable("Ghép khách hàng cho dữ liệu lỗi");
                 
+                resultValue = Action1.ActionFileError(this.listData, ref this.listError);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Get File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string k = "10";
+
+
 
 
 

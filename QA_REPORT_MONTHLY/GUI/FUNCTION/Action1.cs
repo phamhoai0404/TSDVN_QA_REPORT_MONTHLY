@@ -57,7 +57,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
         }
 
 
-        public static string OpenFileExcel(ActionInput1 valueInput, string sheetName, ref List<DataFirst> listData)
+        public static string OpenFileExcelData(ActionInput1 valueInput, string sheetName, ref List<DataFirst> listData)
         {
             Excel.Application app = null;
             Excel.Workbook wb = null;
@@ -137,6 +137,139 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
                 }
+            }
+        }
+
+
+        public static string OpenFileExcelError(ActionInput1 valueInput, ref List<DataError> listError)
+        {
+            Excel.Application app = null;
+            Excel.Workbook wb = null;
+            Excel.Worksheet ws = null;
+            try
+            {
+                app = new Excel.Application();
+                wb = app.Workbooks.Open(valueInput.fileError);
+                ws = wb.Sheets[DataConfig.CONFIG_FILE_ERROR_SHEETNAME];
+
+                //Thuc hien lay dong cuoi cung co du lieu
+                if (ws.AutoFilter != null)
+                {
+                    ws.Unprotect(DataConfig.CONFIG_FILE_ERROR_PASSWORD);
+                    ws.AutoFilterMode = false;
+                }
+                int lastRow = ws.Cells[ws.Rows.Count, "P"].End(Excel.XlDirection.xlUp).Row;
+
+                DataError err = new DataError();
+                for (int i = 11; i <= lastRow; i++)
+                {
+                    //Neu dong du lieu Model trong thi duyet sang dong khac
+                    err.model = ws.Cells[i, "P"].value;
+                    if (string.IsNullOrWhiteSpace(err.model))
+                    {
+                        continue;
+                    }
+
+                    //Duyet bo phan mac loi
+                    err.dept = Convert.ToString(ws.Cells[i, "AA"].value);
+                    if (string.IsNullOrWhiteSpace(err.dept))
+                    {
+                        continue;
+                    }
+                    if (err.dept.Contains("+") || err.dept.Contains("Các"))
+                    {
+                        continue;
+                    }
+
+                    //Thuc hien lay ten loi
+                    err.nameError= Convert.ToString(ws.Cells[i, "T"].value);
+                    if (string.IsNullOrWhiteSpace(err.nameError))
+                    {
+                        continue;
+                    }
+
+                    //Lay so luong loi
+                    int tempQty;
+                    if (!int.TryParse(Convert.ToString(ws.Cells[i, "Z"].value), out tempQty))
+                    {
+                        continue;
+                    }
+                    if (tempQty <= 0)
+                    {
+                        continue;
+                    }
+                    err.qty = tempQty;
+
+                    err.wo = Convert.ToString(ws.Cells[i, "Q"].value);
+                    if (string.IsNullOrWhiteSpace(err.wo))
+                    {
+                        continue;
+                    }
+
+                    listError.Add(new DataError(err));
+
+
+
+                }
+
+
+                return RESULT.OK;
+            }
+            //catch (Exception ex)
+            //{
+            //    return string.Format(RESULT.ERROR_015_CATCH, "OpenFileExcelError", ex.Message);
+            //}
+            finally
+            {
+                if (ws != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(ws);
+                }
+                if (wb != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(wb);
+                }
+                if (app != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+                }
+            }
+        }
+
+        public static string ActionFileError(List<DataFirst> listData, ref List<DataError> listError)
+        {
+            try
+            {
+                foreach (var itemErr in listError.ToArray())
+                {
+                    int indexCheck = -1;
+                    for (int i = 0; i < listData.Count(); i++)
+                    {
+                        if (listData[i].wo.Equals(itemErr.wo))
+                        {
+                            indexCheck = i;
+                            break;
+                        }
+                    }
+
+                    //Neu khong ton tai WO thi dung lai thong bao loi
+                    if(indexCheck == -1)
+                    {
+                        return string.Format(RESULT.ERROR_FILE_ERROR_WO, itemErr.wo, itemErr.ToString());
+                    }
+
+                    itemErr.cusCode = listData[indexCheck].cusCode;
+                }
+
+                return RESULT.OK;
+            }
+            //catch (Exception ex)
+            //{
+            //    return string.Format(RESULT.ERROR_015_CATCH, "ActionFileError", ex.Message);
+            //}
+            finally
+            {
+
             }
         }
     }

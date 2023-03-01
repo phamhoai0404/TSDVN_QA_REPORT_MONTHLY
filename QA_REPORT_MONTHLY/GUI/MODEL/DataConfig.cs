@@ -13,5 +13,7 @@ namespace QA_REPORT_MONTHLY.MODEL
 
         public static string CONFIG_MONTH;
         public static string CONFIG_FILE_ERROR_SHEETNAME;
+        public static string CONFIG_FILE_ERROR_PASSWORD;
+
     }
 }

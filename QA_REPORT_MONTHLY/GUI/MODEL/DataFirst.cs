@@ -32,6 +32,10 @@ namespace QA_REPORT_MONTHLY.MODEL
             this.cusName = s.cusName;
 
         }
+        public override string ToString()
+        {
+            return model + ", "  + cusCode + ", " + cusDetail + ", " + wo + ", " + qty.ToString() + cusName;
+        }
     }
 
 }

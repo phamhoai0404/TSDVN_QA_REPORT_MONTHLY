@@ -13,5 +13,10 @@ namespace QA_REPORT_MONTHLY.MODEL
         public string fileData { get; set; }
         public string fileError { get; set; }
 
+        public override string ToString()
+        {
+            return monthString.ToString()  + "," + fileData.ToString() + ","  + fileError.ToString();
+        }
+
     }
 }
