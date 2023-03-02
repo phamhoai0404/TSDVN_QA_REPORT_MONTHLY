@@ -153,28 +153,42 @@ namespace GUI
 
 
                 
-                if(this.chkTSB.Checked == true)
+                //if(this.chkTSB.Checked == true)
+                //{
+                //    this.updateLable("Thực hiện lấy dữ liệu TSB");
+                //    List<DataTSB> listTSB = new List<DataTSB>();
+                //    resultValue = Action1.GetTSB(listData, listError, ref listTSB);
+                //    if (!resultValue.Equals(RESULT.OK))
+                //    {
+                //        MessageBox.Show(resultValue, "Get Action TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        return;
+                //    }
+                //    this.updateLable("Thực hiện ghi dữ liệu TSB");
+                //    resultValue = ActionWrite.WriteTSB1(listTSB);
+                //    if (!resultValue.Equals(RESULT.OK))
+                //    {
+                //        MessageBox.Show(resultValue, "Get Write TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        return;
+                //    }
+                //}
+
+                if(this.chkKyocera.Checked == true)
                 {
-                    this.updateLable("Thực hiện lấy dữ liệu TSB");
-                    List<DataTSB> listTSB = new List<DataTSB>();
-                    resultValue = Action1.GetTSB(listData, listError, ref listTSB);
+                    this.updateLable("Thực hiện lấy dữ liệu Kyocera");
+                    List<DataKyocera> listKyocera = new List<DataKyocera>();
+                    resultValue = Action1.GetKyocera(listData, listError, ref listKyocera);
                     if (!resultValue.Equals(RESULT.OK))
                     {
-                        MessageBox.Show(resultValue, "Get Action TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(resultValue, "Get Action Kyocera", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    this.updateLable("Thực hiện ghi dữ liệu TSB");
-                    resultValue = ActionWrite.WriteTSB1(listTSB);
+                    this.updateLable("Thực hiện ghi dữ liệu Kyocera");
+                    resultValue = ActionWrite.WriteKyocera1(listKyocera);
                     if (!resultValue.Equals(RESULT.OK))
                     {
-                        MessageBox.Show(resultValue, "Get Write TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(resultValue, "Get Write Kyocera", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                }
-
-                if(this.chkFX.Checked == true)
-                {
-
                 }
 
                 

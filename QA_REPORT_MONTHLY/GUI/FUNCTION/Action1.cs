@@ -357,5 +357,91 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 return string.Format(RESULT.ERROR_015_CATCH, "GetTSB", ex.Message);
             }
         }
+        public static string GetKyocera(List<DataFirst> listData, List<DataError> listError, ref List<DataKyocera> listKyocera)
+        {
+            try
+            {
+                var listChildData = listData.Where(x => x.cusCode.Equals("KYOCERA")).ToList();
+                var listChildErr = listError.Where(x => x.cusCode.Equals("KYOCERA")).ToList();
+
+                //Phan lay du lieu cua model xong roi
+                foreach (var item in listChildData.ToArray())
+                {
+                    string tempModel = item.model;
+                    var check = listKyocera.FirstOrDefault(p => p.item.Equals(tempModel));
+                    if (check != null)
+                    {
+                        continue;
+                    }
+
+                    long qtySum = listChildData.Where(p => p.model == tempModel).Sum(p => p.qty);
+
+                    string tempCus = item.cusDetail.Substring(0, item.cusDetail.IndexOf("-"));
+                    listKyocera.Add(new DataKyocera(tempModel, tempCus, qtySum));
+                }
+
+                foreach (var item in listChildErr)
+                {
+                    string tempModel = item.model;
+                    bool check = false;
+                    foreach (var itemKyocera in listKyocera)
+                    {
+                        if (tempModel.Equals(itemKyocera.item))
+                        {
+                            switch (item.nameError)
+                            {
+                                case string s when s.Equals("Bắc cầu"):
+                                    itemKyocera.qty4BrightMake += item.qty;
+                                    break;
+                                case string s when s.Equals("Bong, vỡ LK"):
+                                    itemKyocera.qty12Peel += item.qty;
+                                    break;
+                                case string s when s.Equals("Dị vật"):
+                                    itemKyocera.qty10OjectForeign += item.qty;
+                                    break;
+                                case string s when s.Equals("Giả hàn"):
+                                    itemKyocera.qty1WeldFake += item.qty;
+                                    break;
+                                case string s when s.Equals("Kênh, Nghiêng"):
+                                    itemKyocera.qty3Warp += item.qty;
+                                    break;
+                                case string s when s.Equals("Không hàn"):
+                                    itemKyocera.qty1WeldFake += item.qty;
+                                    break;
+                                case string s when s.Equals("Ngược hướng"):
+                                    itemKyocera.qty8Reverse += item.qty;
+                                    break;
+                                case string s when s.Equals("Thiếu thiếc"):
+                                    itemKyocera.qty5TinSmall += item.qty;
+                                    break;
+                                case string s when s.Equals("Thừa, thiếu LK"):
+                                    itemKyocera.qty4BrightMake += item.qty;
+
+
+                                    //cai nay lam sau
+                                    break;
+                                default:
+                                    itemKyocera.qty13Other += item.qty;
+                                    break;
+                            }
+
+                            check = true;
+                            break;
+                        }
+                    }
+                    if (check == false)
+                    {
+                        return string.Format(RESULT.ERROR_FILE_ERROR_MODEL, tempModel);
+                    }
+
+                }
+
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "GetKyocera", ex.Message);
+            }
+        }
     }
 }
