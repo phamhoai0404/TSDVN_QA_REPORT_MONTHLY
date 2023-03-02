@@ -92,6 +92,7 @@ namespace GUI
             DataConfig.CONFIG_SOURCE_FILE_ERROR = getConfig["SourceFileError"].ToString();
             DataConfig.CONFIG_FILE_ERROR_SHEETNAME = getConfig["FileError_SheetName"].ToString();
             DataConfig.CONFIG_FILE_ERROR_PASSWORD = getConfig["FileError_Password"].ToString();
+            DataConfig.CONFIG_FILE_TEMPLATE = getConfig["FileTemplate"].ToString();
 
             //DataConfig.CONFIG_MONTH = DateTime.Now.ToString("MM");
             DataConfig.CONFIG_MONTH = "02";
@@ -141,18 +142,44 @@ namespace GUI
                     MessageBox.Show(resultValue, "Get File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                //string k = "10";
 
-                List<DataTSB> listTSB = new List<DataTSB>();
+                //Thuc hien  tao file
+                resultValue = ActionWrite.CreateFile();
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Create File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
+                
                 if(this.chkTSB.Checked == true)
                 {
+                    this.updateLable("Thực hiện lấy dữ liệu TSB");
+                    List<DataTSB> listTSB = new List<DataTSB>();
                     resultValue = Action1.GetTSB(listData, listError, ref listTSB);
                     if (!resultValue.Equals(RESULT.OK))
                     {
                         MessageBox.Show(resultValue, "Get Action TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                    this.updateLable("Thực hiện ghi dữ liệu TSB");
+                    resultValue = ActionWrite.WriteTSB1(listTSB);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Write TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
+
+                if(this.chkFX.Checked == true)
+                {
+
+                }
+
+                
+
+                string k = "10";
 
 
 

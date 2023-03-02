@@ -125,6 +125,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
             finally
             {
+
                 if (ws != null)
                 {
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(ws);
@@ -287,12 +288,65 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
                     long qtySum = listChildData.Where(p => p.model.Substring(0, 9) == tempModel).Sum(p=>p.qty);
 
-                    listTSB.Add(new DataTSB(tempModel, item.cusDetail.Substring(1, 13), qtySum));
+                    string tempCus = item.cusDetail.Substring(0, item.cusDetail.IndexOf(")", 2) + 1);
+                    listTSB.Add(new DataTSB(tempModel, tempCus, qtySum));
                 }
 
                 foreach (var item in listChildErr)
                 {
                     string tempModel = item.model.Substring(0, 9);
+                    bool check = false;
+                    foreach (var itemTSB in listTSB)
+                    {
+                        if (tempModel.Equals(itemTSB.item))
+                        {
+                            switch (item.nameError)
+                            {
+                                case string s when s.Equals("Bắc cầu"):
+                                    itemTSB.qty4BrightMake += item.qty;
+                                    break;
+                                case string s when s.Equals("Bong, vỡ LK"):
+                                    itemTSB.qty12Peel += item.qty;
+                                    break;
+                                case string s when s.Equals("Dị vật"):
+                                    itemTSB.qty10OjectForeign += item.qty;
+                                    break;
+                                case string s when s.Equals("Giả hàn"):
+                                    itemTSB.qty1WeldFake += item.qty;
+                                    break;
+                                case string s when s.Equals("Kênh, Nghiêng"):
+                                    itemTSB.qty3Warp += item.qty;
+                                    break;
+                                case string s when s.Equals("Không hàn"):
+                                    itemTSB.qty1WeldFake += item.qty;
+                                    break;
+                                case string s when s.Equals("Ngược hướng"):
+                                    itemTSB.qty8Reverse += item.qty;
+                                    break;
+                                case string s when s.Equals("Thiếu thiếc"):
+                                    itemTSB.qty5TinSmall += item.qty;
+                                    break;
+                                case string s when s.Equals("Thừa, thiếu LK"):
+                                    itemTSB.qty4BrightMake += item.qty;
+
+
+                                    //cai nay lam sau
+                                    break;
+                                default:
+                                    itemTSB.qty13Other += item.qty;
+                                    break;
+                            }
+
+
+
+                            check = true;
+                            break; 
+                        }
+                    }
+                    if(check == false)
+                    {
+                        return string.Format(RESULT.ERROR_FILE_ERROR_MODEL, tempModel);
+                    }
                     
                 }
 

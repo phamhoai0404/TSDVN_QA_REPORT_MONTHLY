@@ -8,3 +8,13 @@ C:\Users\Sys009\Desktop\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debu
 C:\Users\Sys009\Desktop\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\QA_REPORT_MONTHLY.exe
 C:\Users\Sys009\Desktop\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\QA_REPORT_MONTHLY.pdb
 C:\Users\Sys009\Desktop\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\GUI.csprojAssemblyReference.cache
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\bin\Debug\QA_REPORT_MONTHLY.exe.config
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\bin\Debug\QA_REPORT_MONTHLY.exe
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\bin\Debug\QA_REPORT_MONTHLY.pdb
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\GUI.csprojAssemblyReference.cache
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\GUI.frmMain.resources
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\QA_REPORT_MONTHLY.Properties.Resources.resources
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\GUI.csproj.GenerateResource.cache
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\GUI.csproj.CoreCompileInputs.cache
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\QA_REPORT_MONTHLY.exe
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\QA_REPORT_MONTHLY.pdb

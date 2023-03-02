@@ -25,6 +25,8 @@ namespace QA_REPORT_MONTHLY.MODEL
         public const string ERROR_COLUMN_C = "Bạn chưa nhập Chi  tiết Mã khách hàng ở địa chỉ Cột C dòng: {0} - Lỗi catch: {1}";
 
         public const string ERROR_FILE_ERROR_WO = "Trong file lỗi tồn tại WO: {0}  trong file dữ liệu!  Chi tiết dòng dữ liệu lỗi: {1}";
+
+        public const string ERROR_FILE_ERROR_MODEL = "Không tồn tại model: {0} - trong dữ liệu!";
         //const string k = "10";
     }
 }
