@@ -27,6 +27,9 @@ namespace QA_REPORT_MONTHLY.MODEL
         public const string ERROR_FILE_ERROR_WO = "Trong file lỗi tồn tại WO: {0}  trong file dữ liệu!  Chi tiết dòng dữ liệu lỗi: {1}";
 
         public const string ERROR_FILE_ERROR_MODEL = "Không tồn tại model: {0} - trong dữ liệu!";
+
+        public const string ERROR_FILE_ERROR_NOT_COMMENT = "Không có comment khi thuộc loại Thừa thiếu linh kiện ở dòng: {0}";
+        public const string ERROR_FILE_ERROR_COMMENT_NOT_RULE = "Dòng: {0} - thuộc linh kiện thiếu thừa nhưng note không theo quy tắc (chứa từ thiếu thừa) - note: {1}";
         //const string k = "10";
     }
 }

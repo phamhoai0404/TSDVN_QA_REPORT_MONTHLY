@@ -12,6 +12,7 @@ namespace QA_REPORT_MONTHLY.MODEL
         public int monthInt { get; set; }
         public string fileData { get; set; }
         public string fileError { get; set; }
+        
 
         public override string ToString()
         {

@@ -1,4 +1,5 @@
-﻿using QA_REPORT_MONTHLY.MODEL;
+﻿using Microsoft.Office.Interop.Excel;
+using QA_REPORT_MONTHLY.MODEL;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -188,6 +189,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     {
                         continue;
                     }
+                    
 
                     //Lay so luong loi
                     int tempQty;
@@ -205,6 +207,24 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     if (string.IsNullOrWhiteSpace(err.wo))
                     {
                         continue;
+                    }
+
+                    if (err.nameError.Equals("Thừa, thiếu LK"))
+                    {
+                        Comment comment = ws.Cells[i, "T"].Comment;
+                        if(comment == null)
+                        {
+                            return string.Format(RESULT.ERROR_FILE_ERROR_NOT_COMMENT, i);
+                        }
+                        else
+                        {
+                            if(!(comment.Text().Contains("thiếu") || comment.Text().Contains("thừa")))
+                            {
+                                return string.Format(RESULT.ERROR_FILE_ERROR_COMMENT_NOT_RULE, i, comment.Text());
+                            }
+                            err.noteNameError = comment.Text();
+                        }
+
                     }
 
                     listError.Add(new DataError(err));
@@ -422,6 +442,91 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                                     break;
                                 default:
                                     itemKyocera.qty13Other += item.qty;
+                                    break;
+                            }
+
+                            check = true;
+                            break;
+                        }
+                    }
+                    if (check == false)
+                    {
+                        return string.Format(RESULT.ERROR_FILE_ERROR_MODEL, tempModel);
+                    }
+
+                }
+
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "GetKyocera", ex.Message);
+            }
+        }
+        public static string GetFX(List<DataFirst> listData, List<DataError> listError, ref List<DataFX> listFX)
+        {
+            try
+            {
+                var listChildData = listData.Where(x => x.cusCode.Equals("FX")).ToList();
+                var listChildErr = listError.Where(x => x.cusCode.Equals("FX")).ToList();
+
+                //Phan lay du lieu cua model xong roi
+                foreach (var item in listChildData.ToArray())
+                {
+                    string tempModel = item.model.Substring(0, 9);
+                    var check = listFX.FirstOrDefault(p => p.item.Substring(0, 9).Equals(tempModel));
+                    if (check != null)
+                    {
+                        continue;
+                    }
+
+                    long qtySum = listChildData.Where(p => p.model.Substring(0, 9) == tempModel).Sum(p => p.qty);
+
+                    string tempCus = item.cusDetail.Substring(0, item.cusDetail.IndexOf(")", 2) + 1);
+                    listFX.Add(new DataFX(tempModel, tempCus, qtySum));
+                }
+
+                foreach (var item in listChildErr)
+                {
+                    string tempModel = item.model.Substring(0, 9);
+                    bool check = false;
+                    foreach (var itemFX in listFX)
+                    {
+                        if (tempModel.Equals(itemFX.item))
+                        {
+                            switch (item.nameError)
+                            {
+                                case string s when s.Equals("Bắc cầu"):
+                                    itemFX.qty4BrightMake += item.qty;
+                                    break;
+                                case string s when s.Equals("Bong, vỡ LK"):
+                                    itemFX.qty12Peel += item.qty;
+                                    break;
+                                case string s when s.Equals("Dị vật"):
+                                    itemFX.qty10OjectForeign += item.qty;
+                                    break;
+                                case string s when s.Equals("Giả hàn"):
+                                    itemFX.qty1WeldFake += item.qty;
+                                    break;
+                                case string s when s.Equals("Kênh, Nghiêng"):
+                                    itemFX.qty3Warp += item.qty;
+                                    break;
+                                case string s when s.Equals("Không hàn"):
+                                    itemFX.qty1WeldFake += item.qty;
+                                    break;
+                                case string s when s.Equals("Ngược hướng"):
+                                    itemFX.qty8Reverse += item.qty;
+                                    break;
+                                case string s when s.Equals("Thiếu thiếc"):
+                                    itemFX.qty5TinSmall += item.qty;
+                                    break;
+                                case string s when s.Equals("Thừa, thiếu LK"):
+                                    itemFX.qty4BrightMake += item.qty;
+
+                                    //cai nay lam sau
+                                    break;
+                                default:
+                                    itemFX.qty13Other += item.qty;
                                     break;
                             }
 

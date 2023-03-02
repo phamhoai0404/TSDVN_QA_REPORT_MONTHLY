@@ -51,8 +51,7 @@ namespace QA_REPORT_MONTHLY.MODEL
         public int qty3Warp { get; set; }
         public int qty4BrightMake { get; set; }
         public int qty5TinSmall { get; set; }
-        public int qty6ItemLack { get; set; }
-        public int qty7ErrorPosition { get; set; }
+       
         public int qty8Reverse { get; set; }
         public int qty9DirectionRev { get; set; }
         public int qty10OjectForeign { get; set; }

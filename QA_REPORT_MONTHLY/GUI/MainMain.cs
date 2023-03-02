@@ -116,14 +116,14 @@ namespace GUI
                 }
                 string sheetName = this.inputAction1.monthString + "." + DateTime.Now.ToString("yyyy");
 
-                this.updateLable("Lấy dữ liệu file data...");
-                this.listData.Clear();
-                resultValue = Action1.OpenFileExcelData(this.inputAction1, sheetName, ref listData);
-                if (!resultValue.Equals(RESULT.OK))
-                {
-                    MessageBox.Show(resultValue, "Get Data File", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                //this.updateLable("Lấy dữ liệu file data...");
+                //this.listData.Clear();
+                //resultValue = Action1.OpenFileExcelData(this.inputAction1, sheetName, ref listData);
+                //if (!resultValue.Equals(RESULT.OK))
+                //{
+                //    MessageBox.Show(resultValue, "Get Data File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return;
+                //}
 
                 this.updateLable("Lấy dữ liệu file lỗi.....");
                 this.listError.Clear();
@@ -151,28 +151,28 @@ namespace GUI
                     return;
                 }
 
+                string hoa = DateTime.Now.ToString("hh:mm:ss");
 
-                
-                //if(this.chkTSB.Checked == true)
-                //{
-                //    this.updateLable("Thực hiện lấy dữ liệu TSB");
-                //    List<DataTSB> listTSB = new List<DataTSB>();
-                //    resultValue = Action1.GetTSB(listData, listError, ref listTSB);
-                //    if (!resultValue.Equals(RESULT.OK))
-                //    {
-                //        MessageBox.Show(resultValue, "Get Action TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //        return;
-                //    }
-                //    this.updateLable("Thực hiện ghi dữ liệu TSB");
-                //    resultValue = ActionWrite.WriteTSB1(listTSB);
-                //    if (!resultValue.Equals(RESULT.OK))
-                //    {
-                //        MessageBox.Show(resultValue, "Get Write TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //        return;
-                //    }
-                //}
+                if (this.chkTSB.Checked == true)
+                {
+                    this.updateLable("Thực hiện lấy dữ liệu TSB");
+                    List<DataTSB> listTSB = new List<DataTSB>();
+                    resultValue = Action1.GetTSB(listData, listError, ref listTSB);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Action TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    this.updateLable("Thực hiện ghi dữ liệu TSB");
+                    resultValue = ActionWrite.WriteTSB1(listTSB);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Write TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
 
-                if(this.chkKyocera.Checked == true)
+                if (this.chkKyocera.Checked == true)
                 {
                     this.updateLable("Thực hiện lấy dữ liệu Kyocera");
                     List<DataKyocera> listKyocera = new List<DataKyocera>();
@@ -191,9 +191,28 @@ namespace GUI
                     }
                 }
 
-                
+                if (this.chkFX.Checked == true)
+                {
+                    this.updateLable("Thực hiện lấy dữ liệu Kyocera");
+                    List<DataFX> listFX = new List<DataFX>();
+                    resultValue = Action1.GetFX(listData, listError, ref listFX);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Action FX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    this.updateLable("Thực hiện ghi dữ liệu FX");
+                    resultValue = ActionWrite.WriteFX(listFX);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Write FX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
 
-                string k = "10";
+                hoa += DateTime.Now.ToString("hh:mm:ss");
+                Console.WriteLine(hoa);
+            
 
 
 
