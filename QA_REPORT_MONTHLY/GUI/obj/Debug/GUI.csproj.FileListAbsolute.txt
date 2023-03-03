@@ -17,3 +17,4 @@ D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\GUI.csproj.Gen
 D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\GUI.csproj.CoreCompileInputs.cache
 D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\QA_REPORT_MONTHLY.exe
 D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\QA_REPORT_MONTHLY.pdb
+D:\hoai\Hoai_Daotao\vs\QA\PROJECT\QA_REPORT_MONTHLY\GUI\obj\Debug\GUI.csprojAssemblyReference.cache

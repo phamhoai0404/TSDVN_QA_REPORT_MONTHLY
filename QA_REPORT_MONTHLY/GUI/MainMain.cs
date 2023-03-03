@@ -209,10 +209,89 @@ namespace GUI
                         return;
                     }
                 }
+                if (this.chkHT.Checked == true)
+                {
+                    this.updateLable("Thực hiện lấy dữ liệu Hitachi");
 
-                hoa += DateTime.Now.ToString("hh:mm:ss");
-                Console.WriteLine(hoa);
-            
+                    DataHT valueHT = new DataHT();
+                    resultValue = Action1.GetHT(listData, listError, ref valueHT);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Action HT", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    this.updateLable("Thực hiện ghi dữ liệu HT");
+                    resultValue = ActionWrite.WriteHT(valueHT, this.txtMonth.Text);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Write FX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                if (this.chkOkidenki.Checked == true)
+                {
+                    this.updateLable("Thực hiện lấy dữ liệu OKIDENKI");
+
+                    DataOkidenki valueOkidenki = new DataOkidenki();
+                    resultValue = Action1.GetOkidenki(listData, listError, ref valueOkidenki);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Action OKIDENKI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    this.updateLable("Thực hiện ghi dữ liệu OKIDENKI");
+                    resultValue = ActionWrite.WriteOkidenki(valueOkidenki, this.txtMonth.Text);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Write OKIDENKI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                if (this.chkRiso.Checked == true)
+                {
+                    this.updateLable("Thực hiện lấy dữ liệu RISO");
+
+                    DataRiso valueRiso = new DataRiso();
+                    resultValue = Action1.GetRISO(listData, listError, ref valueRiso);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Action RISO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    this.updateLable("Thực hiện ghi dữ liệu RISO");
+                    resultValue = ActionWrite.WriteRiso(valueRiso, this.txtMonth.Text);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Write RISO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+
+
+
+                if (this.chkJCM.Checked == true)
+                {
+                    this.updateLable("Thực hiện lấy dữ liệu JCM");
+
+                    DataJCM valueRiso = new DataJCM();
+                    resultValue = Action1.GetJCM(listData, listError, ref valueRiso);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Action JCM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    this.updateLable("Thực hiện ghi dữ liệu JCM");
+                    resultValue = ActionWrite.WriteJCM(valueRiso, this.txtMonth.Text);
+                    if (!resultValue.Equals(RESULT.OK))
+                    {
+                        MessageBox.Show(resultValue, "Get Write JCM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+
+
 
 
 

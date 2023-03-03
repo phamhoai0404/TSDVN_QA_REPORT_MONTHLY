@@ -537,7 +537,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                                     itemFX.qty5TinSmall += item.qty;
                                     break;
                                 case string s when s.Equals("Thừa, thiếu LK"):
-                                    if(item.typeThua == true)
+                                    if (item.typeThua == true)
                                     {
                                         itemFX.qty11ItemMiss += item.qty;
                                     }
@@ -568,6 +568,247 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             catch (Exception ex)
             {
                 return string.Format(RESULT.ERROR_015_CATCH, "GetKyocera", ex.Message);
+            }
+        }
+
+        public static string GetHT(List<DataFirst> listData, List<DataError> listError, ref DataHT valueHT)
+        {
+            try
+            {
+                valueHT.qtySum = listData.Where(x => x.cusCode.Equals("HITACHI")).Sum(q => q.qty);
+                var listChildErr = listError.Where(x => x.cusCode.Equals("HITACHI")).ToList();
+
+                foreach (var item in listChildErr)
+                {
+                    switch (item.nameError)
+                    {
+                        case string s when s.Equals("Bắc cầu"):
+                            valueHT.qty4BrightMake += item.qty;
+                            break;
+                        case string s when s.Equals("Giả hàn"):
+                            valueHT.qty1WeldFake += item.qty;
+                            break;
+                        case string s when s.Equals("Kênh, Nghiêng"):
+                            valueHT.qty3Warp += item.qty;
+                            break;
+                        case string s when s.Equals("Không hàn"):
+                            valueHT.qty1WeldFake += item.qty;
+                            break;
+                        case string s when s.Equals("Ngược hướng"):
+                            valueHT.qty8Reverse += item.qty;
+                            break;
+
+                        case string s when s.Equals("Thừa, thiếu LK"):
+                            if (item.typeThua == true)
+                            {
+                                valueHT.qty11ItemMiss += item.qty;
+                            }
+                            else
+                            {
+                                valueHT.qty6ItemLack += item.qty;
+                            }
+                            break;
+
+                        default:
+                            valueHT.qty13Other += item.qty;
+                            break;
+                    }
+                }
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "GetHT", ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
+        public static string GetOkidenki(List<DataFirst> listData, List<DataError> listError, ref DataOkidenki valueOkidenki)
+        {
+            try
+            {
+                valueOkidenki.qtySum = listData.Where(x => x.cusCode.Equals("OKIDENKI")).Sum(q => q.qty);
+                var listChildErr = listError.Where(x => x.cusCode.Equals("OKIDENKI")).ToList();
+
+                foreach (var item in listChildErr)
+                {
+                    switch (item.nameError)
+                    {
+                        case string s when s.Equals("Bắc cầu"):
+                            valueOkidenki.qty4BrightMake += item.qty;
+                            break;
+                        case string s when s.Equals("Bong, vỡ LK"):
+                            valueOkidenki.qty12Peel += item.qty;
+                            break;
+                        case string s when s.Equals("Dị vật"):
+                            valueOkidenki.qty10OjectForeign += item.qty;
+                            break;
+                        case string s when s.Equals("Giả hàn"):
+                            valueOkidenki.qty1WeldFake += item.qty;
+                            break;
+                        case string s when s.Equals("Kênh, Nghiêng"):
+                            valueOkidenki.qty3Warp += item.qty;
+                            break;
+                        case string s when s.Equals("Không hàn"):
+                            valueOkidenki.qty1WeldFake += item.qty;
+                            break;
+                        case string s when s.Equals("Ngược hướng"):
+                            valueOkidenki.qty8Reverse += item.qty;
+                            break;
+                        case string s when s.Equals("Thiếu thiếc"):
+                            valueOkidenki.qty5TinSmall += item.qty;
+                            break;
+                        case string s when s.Equals("Thừa, thiếu LK"):
+                            if (item.typeThua == true)
+                            {
+                                valueOkidenki.qty11ItemMiss += item.qty;
+                            }
+                            else
+                            {
+                                valueOkidenki.qty6ItemLack += item.qty;
+                            }
+                            break;
+
+                        default:
+                            valueOkidenki.qty13Other += item.qty;
+                            break;
+                    }
+                }
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "GetOkidenki", ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
+        public static string GetRISO(List<DataFirst> listData, List<DataError> listError, ref DataRiso valueRiso)
+        {
+            try
+            {
+                valueRiso.qtySum = listData.Where(x => x.cusCode.Equals("RISO")).Sum(q => q.qty);
+                var listChildErr = listError.Where(x => x.cusCode.Equals("RISO")).ToList();
+
+                foreach (var item in listChildErr)
+                {
+                    switch (item.nameError)
+                    {
+                        case string s when s.Equals("Bắc cầu"):
+                            valueRiso.qty4BrightMake += item.qty;
+                            break;
+                        case string s when s.Equals("Bong, vỡ LK"):
+                            valueRiso.qty12Peel += item.qty;
+                            break;
+                        case string s when s.Equals("Dị vật"):
+                            valueRiso.qty10OjectForeign += item.qty;
+                            break;
+                        case string s when s.Equals("Giả hàn"):
+                            valueRiso.qty1WeldFake += item.qty;
+                            break;
+                        case string s when s.Equals("Kênh, Nghiêng"):
+                            valueRiso.qty3Warp += item.qty;
+                            break;
+                        case string s when s.Equals("Không hàn"):
+                            valueRiso.qty1WeldFake += item.qty;
+                            break;
+                        case string s when s.Equals("Ngược hướng"):
+                            valueRiso.qty8Reverse += item.qty;
+                            break;
+                        case string s when s.Equals("Thiếu thiếc"):
+                            valueRiso.qty5TinSmall += item.qty;
+                            break;
+                        case string s when s.Equals("Thừa, thiếu LK"):
+                            if (item.typeThua == true)
+                            {
+                                valueRiso.qty11ItemMiss += item.qty;
+                            }
+                            else
+                            {
+                                valueRiso.qty6ItemLack += item.qty;
+                            }
+                            break;
+
+                        default:
+                            valueRiso.qty13Other += item.qty;
+                            break;
+                    }
+                }
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "GetRiso", ex.Message);
+            }
+            finally
+            {
+
+            }
+        }
+        public static string GetJCM(List<DataFirst> listData, List<DataError> listError, ref DataJCM valueJCM)
+        {
+            try
+            {
+                valueJCM.qtySum = listData.Where(x => x.cusCode.Equals("JCM")).Sum(q => q.qty);
+                var listChildErr = listError.Where(x => x.cusCode.Equals("JCM")).ToList();
+
+                foreach (var item in listChildErr)
+                {
+                    switch (item.nameError)
+                    {
+                        case string s when s.Equals("Bắc cầu"):
+                            valueJCM.qty4BrightMake += item.qty;
+                            break;
+                        case string s when s.Equals("Bong, vỡ LK"):
+                            valueJCM.qty12Peel += item.qty;
+                            break;
+                        case string s when s.Equals("Dị vật"):
+                            valueJCM.qty10OjectForeign += item.qty;
+                            break;
+                        case string s when s.Equals("Giả hàn"):
+                            valueJCM.qty1WeldFake += item.qty;
+                            break;
+                        case string s when s.Equals("Không hàn"):
+                            valueJCM.qty1WeldFake += item.qty;
+                            break;
+                        case string s when s.Equals("Ngược hướng"):
+                            valueJCM.qty8Reverse += item.qty;
+                            break;
+                        case string s when s.Equals("Thiếu thiếc"):
+                            valueJCM.qty5TinSmall += item.qty;
+                            break;
+                        case string s when s.Equals("Thừa, thiếu LK"):
+                            if (item.typeThua == true)
+                            {
+                                valueJCM.qty11ItemMiss += item.qty;
+                            }
+                            else
+                            {
+                                valueJCM.qty6ItemLack += item.qty;
+                            }
+                            break;
+                        case string s when s.Equals("Lệch linh kiện")://Phan nay khac voai cac phan khac
+                            valueJCM.qty14LechLK += item.qty;
+                            break;
+
+                        default:
+                            valueJCM.qty13Other += item.qty;
+                            break;
+                    }
+                }
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "GetJCM", ex.Message);
+            }
+            finally
+            {
+
             }
         }
     }

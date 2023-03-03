@@ -520,9 +520,407 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
             }
         }
+        public static string WriteHT(DataHT valueHT, string month)
+        {
+            Excel.Application app = null;
+            Excel.Workbook wb = null;
+            Excel.Worksheet ws = null;
+            Excel.Range range = null;
+
+            try
+            {
+                app = new Excel.Application();
+                wb = app.Workbooks.Open(DataConfig.CONFIG_FILE_RESULT);
+
+                ws = wb.Sheets["HITACHI_1"];
+
+                int rowCurrent = 3;
+
+                ws.Cells[rowCurrent, "A"].value = month + "月";
+                ws.Cells[rowCurrent, "C"].value = valueHT.qtySum;
+                ws.Cells[rowCurrent, "D"].Formula = string.Format(@"= SUM(G{0}:R{0}", rowCurrent);
+                ws.Cells[rowCurrent, "E"].value = 100;
+                ws.Cells[rowCurrent, "F"].Formula = string.Format("=IF(D{0}=\"\",\"\",D{0}/C{0}*1000000)", rowCurrent);
+
+                if(valueHT.qty8Reverse != 0)
+                {
+                    ws.Cells[rowCurrent, "G"].value = valueHT.qty8Reverse;
+                }
+                if (valueHT.qty6ItemLack != 0)
+                {
+                    ws.Cells[rowCurrent, "H"].value = valueHT.qty6ItemLack;
+                }
+                if (valueHT.qty2ErrorPosition != 0)
+                {
+                    ws.Cells[rowCurrent, "I"].value = valueHT.qty2ErrorPosition;
+                }
+                if (valueHT.qty11ItemMiss != 0)
+                {
+                    ws.Cells[rowCurrent, "J"].value = valueHT.qty11ItemMiss;
+                }
+                if (valueHT.qty1WeldFake != 0)
+                {
+                    ws.Cells[rowCurrent, "L"].value = valueHT.qty1WeldFake;
+                }
+                if (valueHT.qty3Warp != 0)
+                {
+                    ws.Cells[rowCurrent, "M"].value = valueHT.qty3Warp;
+                }
+                if (valueHT.qty4BrightMake != 0)
+                {
+                    ws.Cells[rowCurrent, "P"].value = valueHT.qty4BrightMake;
+                }
+                if (valueHT.qty13Other != 0)
+                {
+                    ws.Cells[rowCurrent, "R"].value = valueHT.qty13Other;
+                }
+
+
+                wb.Save();
+
+                wb.Close();
+                app.Quit();
+
+                return RESULT.OK;
+            }
+            //catch (Exception ex)
+            //{
+            //    return string.Format(RESULT.ERROR_015_CATCH, "WriteTSB1", ex.Message);
+            //}
+            finally
+            {
+                if (range != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(range);
+                }
+                if (ws != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(ws);
+                }
+                if (wb != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(wb);
+                }
+                if (app != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+                }
+            }
+        }
+        public static string WriteOkidenki(DataOkidenki valueOkidenki, string month)
+        {
+            Excel.Application app = null;
+            Excel.Workbook wb = null;
+            Excel.Worksheet ws = null;
+            Excel.Range range = null;
+
+            try
+            {
+                app = new Excel.Application();
+                wb = app.Workbooks.Open(DataConfig.CONFIG_FILE_RESULT);
+
+                ws = wb.Sheets["OKIDENKI_1"];
+
+                int rowCurrent = 3;
+
+                ws.Cells[rowCurrent, "A"].value = month + "月";
+                ws.Cells[rowCurrent, "C"].value = valueOkidenki.qtySum;
+                ws.Cells[rowCurrent, "D"].Formula = string.Format(@"= SUM(G{0}:T{0}", rowCurrent);
+                ws.Cells[rowCurrent, "E"].Formula = string.Format("=D{0}/C{0}*1000000", rowCurrent);
+                ws.Cells[rowCurrent, "F"].value = 80;
+
+                if (valueOkidenki.qty1WeldFake != 0)
+                {
+                    ws.Cells[rowCurrent, "G"].value = valueOkidenki.qty1WeldFake;
+                }
+                if (valueOkidenki.qty2ErrorPosition != 0)
+                {
+                    ws.Cells[rowCurrent, "H"].value = valueOkidenki.qty2ErrorPosition;
+                }
+                if (valueOkidenki.qty3Warp != 0)
+                {
+                    ws.Cells[rowCurrent, "I"].value = valueOkidenki.qty3Warp;
+                }
+                if (valueOkidenki.qty4BrightMake != 0)
+                {
+                    ws.Cells[rowCurrent, "J"].value = valueOkidenki.qty4BrightMake;
+                }
+                if (valueOkidenki.qty5TinSmall != 0)
+                {
+                    ws.Cells[rowCurrent, "K"].value = valueOkidenki.qty5TinSmall;
+                }
+                if (valueOkidenki.qty6ItemLack != 0)
+                {
+                    ws.Cells[rowCurrent, "L"].value = valueOkidenki.qty6ItemLack;
+                }
+
+                if (valueOkidenki.qty8Reverse != 0)
+                {
+                    ws.Cells[rowCurrent, "N"].value = valueOkidenki.qty8Reverse;
+                }
+                if (valueOkidenki.qty9DirectionRev != 0)
+                {
+                    ws.Cells[rowCurrent, "O"].value = valueOkidenki.qty9DirectionRev;
+                }
+                if (valueOkidenki.qty10OjectForeign != 0)
+                {
+                    ws.Cells[rowCurrent, "P"].value = valueOkidenki.qty10OjectForeign;
+                }
+                if (valueOkidenki.qty11ItemMiss != 0)
+                {
+                    ws.Cells[rowCurrent, "Q"].value = valueOkidenki.qty11ItemMiss;
+                }
+                if (valueOkidenki.qty12Peel!= 0)
+                {
+                    ws.Cells[rowCurrent, "R"].value = valueOkidenki.qty12Peel;
+                }
+                if (valueOkidenki.qty13Other != 0)
+                {
+                    ws.Cells[rowCurrent, "T"].value = valueOkidenki.qty13Other;
+                }
 
 
 
+
+                wb.Save();
+
+                wb.Close();
+                app.Quit();
+
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "WriteOkidenki", ex.Message);
+            }
+            finally
+            {
+                if (range != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(range);
+                }
+                if (ws != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(ws);
+                }
+                if (wb != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(wb);
+                }
+                if (app != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+                }
+            }
+        }
+        public static string WriteRiso(DataRiso valueRiso, string month)
+        {
+            Excel.Application app = null;
+            Excel.Workbook wb = null;
+            Excel.Worksheet ws = null;
+            Excel.Range range = null;
+
+            try
+            {
+                app = new Excel.Application();
+                wb = app.Workbooks.Open(DataConfig.CONFIG_FILE_RESULT);
+
+                ws = wb.Sheets["RISO_1"];
+
+                int rowCurrent = 3;
+
+                ws.Cells[rowCurrent, "A"].value = month + "月";
+                ws.Cells[rowCurrent, "C"].value = valueRiso.qtySum;
+                ws.Cells[rowCurrent, "D"].Formula = string.Format(@"= SUM(G{0}:S{0}", rowCurrent);
+                ws.Cells[rowCurrent, "E"].Formula = string.Format("=D{0}/C{0}*1000000", rowCurrent);
+                ws.Cells[rowCurrent, "F"].value = 80;
+
+                if (valueRiso.qty1WeldFake != 0)
+                {
+                    ws.Cells[rowCurrent, "G"].value = valueRiso.qty1WeldFake;
+                }
+                if (valueRiso.qty2ErrorPosition != 0)
+                {
+                    ws.Cells[rowCurrent, "H"].value = valueRiso.qty2ErrorPosition;
+                }
+                if (valueRiso.qty3Warp != 0)
+                {
+                    ws.Cells[rowCurrent, "I"].value = valueRiso.qty3Warp;
+                }
+                if (valueRiso.qty4BrightMake != 0)
+                {
+                    ws.Cells[rowCurrent, "J"].value = valueRiso.qty4BrightMake;
+                }
+                if (valueRiso.qty5TinSmall != 0)
+                {
+                    ws.Cells[rowCurrent, "K"].value = valueRiso.qty5TinSmall;
+                }
+                if (valueRiso.qty6ItemLack != 0)
+                {
+                    ws.Cells[rowCurrent, "L"].value = valueRiso.qty6ItemLack;
+                }
+
+                if (valueRiso.qty8Reverse != 0)
+                {
+                    ws.Cells[rowCurrent, "N"].value = valueRiso.qty8Reverse;
+                }
+                if (valueRiso.qty9DirectionRev != 0)
+                {
+                    ws.Cells[rowCurrent, "O"].value = valueRiso.qty9DirectionRev;
+                }
+                if (valueRiso.qty10OjectForeign != 0)
+                {
+                    ws.Cells[rowCurrent, "P"].value = valueRiso.qty10OjectForeign;
+                }
+                if (valueRiso.qty11ItemMiss != 0)
+                {
+                    ws.Cells[rowCurrent, "Q"].value = valueRiso.qty11ItemMiss;
+                }
+                if (valueRiso.qty12Peel != 0)
+                {
+                    ws.Cells[rowCurrent, "R"].value = valueRiso.qty12Peel;
+                }
+                if (valueRiso.qty13Other != 0)
+                {
+                    ws.Cells[rowCurrent, "S"].value = valueRiso.qty13Other;
+                }
+
+
+
+
+                wb.Save();
+
+                wb.Close();
+                app.Quit();
+
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "WriteRiso", ex.Message);
+            }
+            finally
+            {
+                if (range != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(range);
+                }
+                if (ws != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(ws);
+                }
+                if (wb != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(wb);
+                }
+                if (app != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+                }
+            }
+        }
+        public static string WriteJCM(DataJCM valueJCM, string month)
+        {
+            Excel.Application app = null;
+            Excel.Workbook wb = null;
+            Excel.Worksheet ws = null;
+            Excel.Range range = null;
+
+            try
+            {
+                app = new Excel.Application();
+                wb = app.Workbooks.Open(DataConfig.CONFIG_FILE_RESULT);
+
+                ws = wb.Sheets["JCM_1"];
+
+                int rowCurrent = 3;
+
+                ws.Cells[rowCurrent, "A"].value = month + "月";
+                ws.Cells[rowCurrent, "C"].value = valueJCM.qtySum;
+                ws.Cells[rowCurrent, "D"].Formula = string.Format(@"= SUM(G{0}:S{0}", rowCurrent);
+                ws.Cells[rowCurrent, "E"].Formula = string.Format("=D{0}/C{0}*1000000", rowCurrent);
+                ws.Cells[rowCurrent, "F"].value = 80;
+
+                if (valueJCM.qty1WeldFake != 0)
+                {
+                    ws.Cells[rowCurrent, "G"].value = valueJCM.qty1WeldFake;
+                }
+                if (valueJCM.qty14LechLK != 0)
+                {
+                    ws.Cells[rowCurrent, "H"].value = valueJCM.qty14LechLK;
+                }
+                
+                if (valueJCM.qty4BrightMake != 0)
+                {
+                    ws.Cells[rowCurrent, "J"].value = valueJCM.qty4BrightMake;
+                }
+
+                if (valueJCM.qty5TinSmall != 0)
+                {
+                    ws.Cells[rowCurrent, "K"].value = valueJCM.qty5TinSmall;
+                }
+                if (valueJCM.qty6ItemLack != 0)
+                {
+                    ws.Cells[rowCurrent, "L"].value = valueJCM.qty6ItemLack;
+                }
+                if (valueJCM.qty8Reverse != 0)
+                {
+                    ws.Cells[rowCurrent, "M"].value = valueJCM.qty8Reverse;
+                }
+
+                if (valueJCM.qty11ItemMiss != 0)
+                {
+                    ws.Cells[rowCurrent, "N"].value = valueJCM.qty11ItemMiss;
+                }
+                
+                if (valueJCM.qty10OjectForeign != 0)
+                {
+                    ws.Cells[rowCurrent, "P"].value = valueJCM.qty10OjectForeign;
+                }
+                if (valueJCM.qty12Peel != 0)
+                {
+                    ws.Cells[rowCurrent, "Q"].value = valueJCM.qty12Peel;
+                }
+                
+                if (valueJCM.qty13Other != 0)
+                {
+                    ws.Cells[rowCurrent, "S"].value = valueJCM.qty13Other;
+                }
+
+
+
+
+                wb.Save();
+
+                wb.Close();
+                app.Quit();
+
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "WriteRiso", ex.Message);
+            }
+            finally
+            {
+                if (range != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(range);
+                }
+                if (ws != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(ws);
+                }
+                if (wb != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(wb);
+                }
+                if (app != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+                }
+            }
+        }
 
     }
 }
