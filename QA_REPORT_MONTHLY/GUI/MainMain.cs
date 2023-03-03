@@ -116,14 +116,14 @@ namespace GUI
                 }
                 string sheetName = this.inputAction1.monthString + "." + DateTime.Now.ToString("yyyy");
 
-                //this.updateLable("Lấy dữ liệu file data...");
-                //this.listData.Clear();
-                //resultValue = Action1.OpenFileExcelData(this.inputAction1, sheetName, ref listData);
-                //if (!resultValue.Equals(RESULT.OK))
-                //{
-                //    MessageBox.Show(resultValue, "Get Data File", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    return;
-                //}
+                this.updateLable("Lấy dữ liệu file data...");
+                this.listData.Clear();
+                resultValue = Action1.OpenFileExcelData(this.inputAction1, sheetName, ref listData);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Get Data File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 this.updateLable("Lấy dữ liệu file lỗi.....");
                 this.listError.Clear();

@@ -11,7 +11,7 @@ namespace QA_REPORT_MONTHLY.MODEL
         public string model { get; set; }
         public string wo { get; set; }
         public string nameError { get; set; }
-        public string noteNameError { get; set; }
+        public bool typeThua { get; set; }//Neu thua la true, neu thieu la false
 
         public string dept { get; set; }
 
@@ -30,7 +30,7 @@ namespace QA_REPORT_MONTHLY.MODEL
             this.cusCode = s.cusCode;
             this.qty = s.qty;
             this.dept = s.dept;
-            this.noteNameError = s.noteNameError;
+            this.typeThua = s.typeThua;
         }
         public override string ToString()
         {

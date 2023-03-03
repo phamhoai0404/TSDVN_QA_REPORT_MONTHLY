@@ -117,7 +117,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     check = ws.Cells[rowCurrent, "D"].Value;
                 }
 
-
+                wb.Close(false);
                 return RESULT.OK;
             }
             catch (Exception ex)
@@ -184,12 +184,12 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     }
 
                     //Thuc hien lay ten loi
-                    err.nameError= Convert.ToString(ws.Cells[i, "T"].value);
+                    err.nameError = Convert.ToString(ws.Cells[i, "T"].value);
                     if (string.IsNullOrWhiteSpace(err.nameError))
                     {
                         continue;
                     }
-                    
+
 
                     //Lay so luong loi
                     int tempQty;
@@ -209,37 +209,43 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                         continue;
                     }
 
-                    if (err.nameError.Equals("Thừa, thiếu LK"))
+                    if (err.nameError.Equals(MdlComment.TYPE_ERROR_THUA_THIEU_LK))
                     {
                         Comment comment = ws.Cells[i, "T"].Comment;
-                        if(comment == null)
+                        if (comment == null)
                         {
                             return string.Format(RESULT.ERROR_FILE_ERROR_NOT_COMMENT, i);
                         }
                         else
                         {
-                            if(!(comment.Text().Contains("thiếu") || comment.Text().Contains("thừa")))
+                            string temp = comment.Text();
+                            switch (temp)
                             {
-                                return string.Format(RESULT.ERROR_FILE_ERROR_COMMENT_NOT_RULE, i, comment.Text());
-                            }
-                            err.noteNameError = comment.Text();
-                        }
+                                case string s when s.IndexOf(MdlComment.TYPE_ERROR_CHILD_THIEU, StringComparison.OrdinalIgnoreCase) >= 0:
+                                    err.typeThua = false;
+                                    break;
+                                case string s when s.IndexOf(MdlComment.TYPE_ERROR_CHILD_THUA, StringComparison.OrdinalIgnoreCase) >= 0:
+                                    err.typeThua = true;
+                                    break;
+                                default:
+                                    return string.Format(RESULT.ERROR_FILE_ERROR_COMMENT_NOT_RULE, i, comment.Text());
 
+                            }
+
+
+                        }
                     }
 
                     listError.Add(new DataError(err));
-
-
-
                 }
 
-
+                wb.Close(false);
                 return RESULT.OK;
             }
-            //catch (Exception ex)
-            //{
-            //    return string.Format(RESULT.ERROR_015_CATCH, "OpenFileExcelError", ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "OpenFileExcelError", ex.Message);
+            }
             finally
             {
                 if (ws != null)
@@ -274,7 +280,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     }
 
                     //Neu khong ton tai WO thi dung lai thong bao loi
-                    if(indexCheck == -1)
+                    if (indexCheck == -1)
                     {
                         return string.Format(RESULT.ERROR_FILE_ERROR_WO, itemErr.wo, itemErr.ToString());
                     }
@@ -301,12 +307,12 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     string tempModel = item.model.Substring(0, 9);
                     var check = listTSB.FirstOrDefault(p => p.item.Equals(tempModel));
-                    if(check != null)
+                    if (check != null)
                     {
                         continue;
                     }
 
-                    long qtySum = listChildData.Where(p => p.model.Substring(0, 9) == tempModel).Sum(p=>p.qty);
+                    long qtySum = listChildData.Where(p => p.model.Substring(0, 9) == tempModel).Sum(p => p.qty);
 
                     string tempCus = item.cusDetail.Substring(0, item.cusDetail.IndexOf(")", 2) + 1);
                     listTSB.Add(new DataTSB(tempModel, tempCus, qtySum));
@@ -347,11 +353,16 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                                     itemTSB.qty5TinSmall += item.qty;
                                     break;
                                 case string s when s.Equals("Thừa, thiếu LK"):
-                                    itemTSB.qty4BrightMake += item.qty;
-
-
-                                    //cai nay lam sau
+                                    if (item.typeThua == true)
+                                    {
+                                        itemTSB.qty11ItemMiss += item.qty;
+                                    }
+                                    else
+                                    {
+                                        itemTSB.qty6ItemLack += item.qty;
+                                    }
                                     break;
+
                                 default:
                                     itemTSB.qty13Other += item.qty;
                                     break;
@@ -360,14 +371,14 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
 
                             check = true;
-                            break; 
+                            break;
                         }
                     }
-                    if(check == false)
+                    if (check == false)
                     {
                         return string.Format(RESULT.ERROR_FILE_ERROR_MODEL, tempModel);
                     }
-                    
+
                 }
 
                 return RESULT.OK;
@@ -435,10 +446,15 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                                     itemKyocera.qty5TinSmall += item.qty;
                                     break;
                                 case string s when s.Equals("Thừa, thiếu LK"):
-                                    itemKyocera.qty4BrightMake += item.qty;
+                                    if (item.typeThua == true)
+                                    {
+                                        itemKyocera.qty11ItemMiss += item.qty;
+                                    }
+                                    else
+                                    {
+                                        itemKyocera.qty6ItemLack += item.qty;
+                                    }
 
-
-                                    //cai nay lam sau
                                     break;
                                 default:
                                     itemKyocera.qty13Other += item.qty;
@@ -521,9 +537,15 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                                     itemFX.qty5TinSmall += item.qty;
                                     break;
                                 case string s when s.Equals("Thừa, thiếu LK"):
-                                    itemFX.qty4BrightMake += item.qty;
+                                    if(item.typeThua == true)
+                                    {
+                                        itemFX.qty11ItemMiss += item.qty;
+                                    }
+                                    else
+                                    {
+                                        itemFX.qty13Other += item.qty;
+                                    }
 
-                                    //cai nay lam sau
                                     break;
                                 default:
                                     itemFX.qty13Other += item.qty;
