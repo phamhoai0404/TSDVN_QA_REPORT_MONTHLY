@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +71,27 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
         }
 
-       
+        /// <summary>
+        /// Thuc hien dong tat ca ten .exe la nameProcess (nhu dong o task manager)
+        /// </summary>
+        /// <param name="nameProcess">Ten muon Skill</param>
+        /// <returns></returns>
+        /// CreatedBy: HoaiPT(Su dung tu lau nhung h moi chinh thuc dua ra function: 22/11/2022)
+        public static bool Skill_Process(string nameProcess)
+        {
+            try
+            {
+                foreach (var process in Process.GetProcessesByName(nameProcess))
+                {
+                    process.Kill();
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
     }
 }

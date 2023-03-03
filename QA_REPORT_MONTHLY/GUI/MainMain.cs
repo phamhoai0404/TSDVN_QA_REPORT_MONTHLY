@@ -114,6 +114,21 @@ namespace GUI
                     MessageBox.Show(resultValue, "Validate Action 1", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                if(this.chkTSB.Checked == false &&
+                   this.chkFX.Checked == false &&
+                   this.chkKyocera.Checked == false &&
+                   this.chkHT.Checked == false &&
+                   this.chkOkidenki.Checked == false &&
+                   this.chkRiso.Checked == false &&
+                   this.chkJCM.Checked == false)
+                {
+                    MessageBox.Show("Bạn không thực hiện chọn báo cáo nào!", "Not Select Report", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
+
                 string sheetName = this.inputAction1.monthString + "." + DateTime.Now.ToString("yyyy");
 
                 this.updateLable("Lấy dữ liệu file data...");
@@ -313,12 +328,13 @@ namespace GUI
 
 
             }
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Có lỗi xảy ra vui lòng liên hệ bộ phận IT để được hỗ trợ!" + ex.Message, "Run Program", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra vui lòng liên hệ bộ phận IT để được hỗ trợ!" + ex.Message, "Run Program", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             finally
             {
+                MyFunction2.Skill_Process("Excel");
                 this.actionButton(true);
             }
         }
