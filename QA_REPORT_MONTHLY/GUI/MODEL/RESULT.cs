@@ -31,5 +31,13 @@ namespace QA_REPORT_MONTHLY.MODEL
         public const string ERROR_FILE_ERROR_NOT_COMMENT = "Không có comment khi thuộc loại Thừa thiếu linh kiện ở dòng: {0}";
         public const string ERROR_FILE_ERROR_COMMENT_NOT_RULE = "Dòng: {0} - thuộc linh kiện thiếu thừa nhưng note không theo quy tắc (chứa từ thiếu thừa) - note: {1}";
         //const string k = "10";
+
+         public const string ERROR_2_INPUT_NOT_NUMBER = "{0} cần nhập vào là số !";
+         public const string ERROR_2_INPUT_NUMBER_RULE = "Dòng kết thúc > dòng bắt đầu !";
+
+
+        public const string ERROR_2_NOT_NULL_MODEL = "Không được để trống model dữ liệu model ở dòng: {0}";
+        public const string ERROR_2_NOT_OPEN = "Model không có tên khách hàng ở dòng: {0}";
+        public const string ERROR_2_NOT_NUMBER = "Cột {0} không phải là số ở dòng: {1}";
     }
 }

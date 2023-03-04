@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FUNCTION\Action1.cs" />
+    <Compile Include="FUNCTION\Action2.cs" />
     <Compile Include="FUNCTION\MyFunction1.cs" />
     <Compile Include="FUNCTION\MyFunction2.cs" />
     <Compile Include="MainMain.cs">
@@ -60,7 +61,7 @@
     <Compile Include="MainMain.Designer.cs">
       <DependentUpon>MainMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="MODEL\ActionInput1.cs" />
+    <Compile Include="MODEL\ActionInput.cs" />
     <Compile Include="FUNCTION\ActionWrite.cs" />
     <Compile Include="MODEL\DataConfig.cs" />
     <Compile Include="MODEL\DataError.cs" />

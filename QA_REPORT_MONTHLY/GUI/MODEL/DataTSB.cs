@@ -51,7 +51,7 @@ namespace QA_REPORT_MONTHLY.MODEL
         public int qty3Warp { get; set; }
         public int qty4BrightMake { get; set; }
         public int qty5TinSmall { get; set; }
-       
+
         public int qty8Reverse { get; set; }
         public int qty9DirectionRev { get; set; }
         public int qty10OjectForeign { get; set; }
@@ -97,6 +97,47 @@ namespace QA_REPORT_MONTHLY.MODEL
         {
 
         }
+        public DataKyocera(DataKyocera s)
+        {
+            this.item = s.item;
+            this.cus = s.cus;
+
+            this.qtySum = s.qtySum;
+
+            this.qty1WeldFake = s.qty1WeldFake;
+            this.qty2ErrorPosition = s.qty2ErrorPosition;
+            this.qty3Warp = s.qty3Warp;
+            this.qty4BrightMake = s.qty4BrightMake;
+            this.qty5TinSmall = s.qty5TinSmall;
+            this.qty6ItemLack = s.qty6ItemLack;
+            this.qty7ErrorPosition = s.qty7ErrorPosition;
+            this.qty8Reverse = s.qty8Reverse;
+            this.qty9DirectionRev = s.qty9DirectionRev;
+            this.qty10OjectForeign = s.qty10OjectForeign;
+            this.qty11ItemMiss = s.qty11ItemMiss;
+            this.qty12Peel = s.qty12Peel;
+            this.qty13Other = s.qty13Other;
+        }
+
+
+        public void Pus(DataKyocera s)
+        {
+            this.qtySum += s.qtySum;
+
+            this.qty1WeldFake += s.qty1WeldFake;
+            this.qty2ErrorPosition += s.qty2ErrorPosition;
+            this.qty3Warp += s.qty3Warp;
+            this.qty4BrightMake += s.qty4BrightMake;
+            this.qty5TinSmall += s.qty5TinSmall;
+            this.qty6ItemLack += s.qty6ItemLack;
+            this.qty7ErrorPosition += s.qty7ErrorPosition;
+            this.qty8Reverse += s.qty8Reverse;
+            this.qty9DirectionRev += s.qty9DirectionRev;
+            this.qty10OjectForeign += s.qty10OjectForeign;
+            this.qty11ItemMiss += s.qty11ItemMiss;
+            this.qty12Peel += s.qty12Peel;
+            this.qty13Other += s.qty13Other;
+        }
         public DataKyocera(string item, string cus, long qtySum)
         {
             this.item = item;
@@ -134,7 +175,7 @@ namespace QA_REPORT_MONTHLY.MODEL
         public int qty4BrightMake { get; set; }
         public int qty5TinSmall { get; set; }
         public int qty6ItemLack { get; set; }
-       // public int qty7ErrorPosition { get; set; }
+        // public int qty7ErrorPosition { get; set; }
         public int qty8Reverse { get; set; }
         public int qty9DirectionRev { get; set; }
         public int qty10OjectForeign { get; set; }

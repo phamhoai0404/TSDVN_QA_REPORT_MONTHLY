@@ -61,6 +61,22 @@ namespace GUI
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btn2RefreshAll = new System.Windows.Forms.Button();
+            this.btn2ActionMain = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn2SelectFile = new System.Windows.Forms.Button();
+            this.txt2RowEnd = new System.Windows.Forms.TextBox();
+            this.txt2ColModel = new System.Windows.Forms.TextBox();
+            this.txt2RowStart = new System.Windows.Forms.TextBox();
+            this.txt2FileData = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lable = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt2SheetName = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -72,6 +88,8 @@ namespace GUI
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -179,6 +197,7 @@ namespace GUI
             // tabMain
             // 
             this.tabMain.Controls.Add(this.tabPage1);
+            this.tabMain.Controls.Add(this.tabPage2);
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.Location = new System.Drawing.Point(0, 0);
@@ -375,7 +394,6 @@ namespace GUI
             this.txtMonth.Name = "txtMonth";
             this.txtMonth.Size = new System.Drawing.Size(40, 22);
             this.txtMonth.TabIndex = 1;
-            this.txtMonth.TextChanged += new System.EventHandler(this.txtFileData_TextChanged);
             // 
             // txtFileData
             // 
@@ -383,7 +401,6 @@ namespace GUI
             this.txtFileData.Name = "txtFileData";
             this.txtFileData.Size = new System.Drawing.Size(604, 22);
             this.txtFileData.TabIndex = 1;
-            this.txtFileData.TextChanged += new System.EventHandler(this.txtFileData_TextChanged);
             // 
             // label5
             // 
@@ -411,6 +428,174 @@ namespace GUI
             this.label6.Size = new System.Drawing.Size(77, 16);
             this.label6.TabIndex = 0;
             this.label6.Text = "File Dữ liệu:";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btn2RefreshAll);
+            this.tabPage2.Controls.Add(this.btn2ActionMain);
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.lable);
+            this.tabPage2.Location = new System.Drawing.Point(4, 33);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Size = new System.Drawing.Size(712, 489);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Kyocera";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btn2RefreshAll
+            // 
+            this.btn2RefreshAll.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn2RefreshAll.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn2RefreshAll.BackgroundImage")));
+            this.btn2RefreshAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn2RefreshAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn2RefreshAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btn2RefreshAll.ForeColor = System.Drawing.Color.Navy;
+            this.btn2RefreshAll.Location = new System.Drawing.Point(37, 350);
+            this.btn2RefreshAll.Name = "btn2RefreshAll";
+            this.btn2RefreshAll.Size = new System.Drawing.Size(60, 54);
+            this.btn2RefreshAll.TabIndex = 105;
+            this.btn2RefreshAll.UseVisualStyleBackColor = false;
+            this.btn2RefreshAll.Click += new System.EventHandler(this.btn2RefreshAll_Click);
+            // 
+            // btn2ActionMain
+            // 
+            this.btn2ActionMain.Location = new System.Drawing.Point(117, 350);
+            this.btn2ActionMain.Name = "btn2ActionMain";
+            this.btn2ActionMain.Size = new System.Drawing.Size(557, 54);
+            this.btn2ActionMain.TabIndex = 104;
+            this.btn2ActionMain.Text = "GỘP DỮ LIỆU";
+            this.btn2ActionMain.UseVisualStyleBackColor = true;
+            this.btn2ActionMain.Click += new System.EventHandler(this.btn2ActionMain_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.btn2SelectFile);
+            this.groupBox2.Controls.Add(this.txt2SheetName);
+            this.groupBox2.Controls.Add(this.txt2RowEnd);
+            this.groupBox2.Controls.Add(this.txt2ColModel);
+            this.groupBox2.Controls.Add(this.txt2RowStart);
+            this.groupBox2.Controls.Add(this.txt2FileData);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(37, 90);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(637, 208);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Nguồn dữ liệu";
+            // 
+            // btn2SelectFile
+            // 
+            this.btn2SelectFile.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn2SelectFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn2SelectFile.BackgroundImage")));
+            this.btn2SelectFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn2SelectFile.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn2SelectFile.Location = new System.Drawing.Point(574, 130);
+            this.btn2SelectFile.Name = "btn2SelectFile";
+            this.btn2SelectFile.Size = new System.Drawing.Size(33, 29);
+            this.btn2SelectFile.TabIndex = 102;
+            this.btn2SelectFile.UseVisualStyleBackColor = false;
+            // 
+            // txt2RowEnd
+            // 
+            this.txt2RowEnd.Location = new System.Drawing.Point(476, 73);
+            this.txt2RowEnd.Name = "txt2RowEnd";
+            this.txt2RowEnd.Size = new System.Drawing.Size(90, 22);
+            this.txt2RowEnd.TabIndex = 1;
+           // this.txt2RowEnd.TextChanged += new System.EventHandler(this.txt2RowEnd_TextChanged);
+            // 
+            // txt2ColModel
+            // 
+            this.txt2ColModel.Location = new System.Drawing.Point(180, 73);
+            this.txt2ColModel.Name = "txt2ColModel";
+            this.txt2ColModel.Size = new System.Drawing.Size(93, 22);
+            this.txt2ColModel.TabIndex = 1;
+           // this.txt2ColModel.TextChanged += new System.EventHandler(this.txt2ColModel_TextChanged);
+            // 
+            // txt2RowStart
+            // 
+            this.txt2RowStart.Location = new System.Drawing.Point(330, 73);
+            this.txt2RowStart.Name = "txt2RowStart";
+            this.txt2RowStart.Size = new System.Drawing.Size(89, 22);
+            this.txt2RowStart.TabIndex = 1;
+         //   this.txt2RowStart.TextChanged += new System.EventHandler(this.txt2RowStart_TextChanged);
+            // 
+            // txt2FileData
+            // 
+            this.txt2FileData.Location = new System.Drawing.Point(31, 133);
+            this.txt2FileData.Name = "txt2FileData";
+            this.txt2FileData.Size = new System.Drawing.Size(537, 22);
+            this.txt2FileData.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(475, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(92, 16);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Dòng kết thúc:";
+         //  this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(177, 54);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(72, 16);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Cột Model:";
+           // this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(327, 54);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 16);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Dòng bắt đầu:";
+           // this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(31, 114);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 16);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "File Dữ liệu:";
+            // 
+            // lable
+            // 
+            this.lable.AutoSize = true;
+            this.lable.Location = new System.Drawing.Point(33, 29);
+            this.lable.Name = "lable";
+            this.lable.Size = new System.Drawing.Size(234, 24);
+            this.lable.TabIndex = 0;
+            this.lable.Text = "GỘP DỮ LIỆU 2 NHÀ MÁY";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(28, 54);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 16);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "SheetName:";
+            // 
+            // txt2SheetName
+            // 
+            this.txt2SheetName.Location = new System.Drawing.Point(31, 73);
+            this.txt2SheetName.Name = "txt2SheetName";
+            this.txt2SheetName.Size = new System.Drawing.Size(90, 22);
+            this.txt2SheetName.TabIndex = 1;
             // 
             // frmMain
             // 
@@ -440,6 +625,10 @@ namespace GUI
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -477,6 +666,22 @@ namespace GUI
         private System.Windows.Forms.Button btnActionMain;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMonth;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btn2SelectFile;
+        private System.Windows.Forms.TextBox txt2FileData;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lable;
+        private System.Windows.Forms.TextBox txt2RowStart;
+        private System.Windows.Forms.TextBox txt2RowEnd;
+        private System.Windows.Forms.TextBox txt2ColModel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btn2RefreshAll;
+        private System.Windows.Forms.Button btn2ActionMain;
+        private System.Windows.Forms.TextBox txt2SheetName;
+        private System.Windows.Forms.Label label10;
     }
 }
 

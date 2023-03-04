@@ -20,6 +20,7 @@ namespace GUI
             InitializeComponent();
         }
         ActionInput1 inputAction1 = new ActionInput1();
+        ActionInput2 valueInput2 = new ActionInput2();
         List<DataFirst> listData = new List<DataFirst>();
         List<DataError> listError = new List<DataError>();
 
@@ -76,6 +77,7 @@ namespace GUI
                 this.GetConfig(getConfig);
 
                 this.btnClearAll.PerformClick();
+                this.SetDataFirst2();//Thuc hien set du lieu cho Action 2
             }
             catch (Exception ex)
             {
@@ -96,6 +98,9 @@ namespace GUI
 
             //DataConfig.CONFIG_MONTH = DateTime.Now.ToString("MM");
             DataConfig.CONFIG_MONTH = "02";
+
+            DataConfig.CONFIG_2_COLUMM_MODEL = getConfig["2ColumnMode"].ToString();
+
         }
 
         private void btnActionMain_Click(object sender, EventArgs e)
@@ -115,7 +120,7 @@ namespace GUI
                     return;
                 }
 
-                if(this.chkTSB.Checked == false &&
+                if (this.chkTSB.Checked == false &&
                    this.chkFX.Checked == false &&
                    this.chkKyocera.Checked == false &&
                    this.chkHT.Checked == false &&
@@ -150,7 +155,7 @@ namespace GUI
                 }
 
                 this.updateLable("Ghép khách hàng cho dữ liệu lỗi");
-                
+
                 resultValue = Action1.ActionFileError(this.listData, ref this.listError);
                 if (!resultValue.Equals(RESULT.OK))
                 {
@@ -347,8 +352,15 @@ namespace GUI
         }
         private void btnClearAll_Click(object sender, EventArgs e)
         {
-            this.SetDataFirst();
+            this.SetDataFirst1();
             this.SetAllCheck1();
+        }
+        private void btn2RefreshAll_Click(object sender, EventArgs e)
+        {
+            this.txt2RowEnd.Clear();
+            this.txt2RowStart.Clear();
+
+            this.SetDataFirst2();
         }
         private void SetAllCheck1()
         {
@@ -360,11 +372,23 @@ namespace GUI
             this.chkRiso.Checked = true;
             this.chkJCM.Checked = true;
         }
-        private void SetDataFirst()
+        private void SetDataFirst1()
         {
             this.txtFileData.Text = DataConfig.CONFIG_SOURCE_FILE_DATA;
             this.txtFileError.Text = DataConfig.CONFIG_SOURCE_FILE_ERROR;
             this.txtMonth.Text = DataConfig.CONFIG_MONTH;
+        }
+        private void SetDataFirst2()
+        {
+            
+            this.txt2ColModel.Text = DataConfig.CONFIG_2_COLUMM_MODEL;
+
+            //Du lieu test o day xoa di nha
+            this.txt2FileData.Text = @"P:\96. Share Data\99. Other\13. IT\HOAI\QA_REPORT\2023.01_Kyocera様月報 - CUT.xlsx";
+            this.txt2RowEnd.Text = "488";
+            this.txt2RowStart.Text = "411";
+            this.txt2SheetName.Text = "部品コード";
+            this.tabMain.SelectedIndex = 1;
         }
         #endregion
 
@@ -404,9 +428,59 @@ namespace GUI
         }
         #endregion
 
-        private void txtFileData_TextChanged(object sender, EventArgs e)
-        {
 
+        private void GetDataInput_2()
+        {
+            this.valueInput2.rowEndString = this.txt2RowEnd.Text;
+            this.valueInput2.rowStartString = this.txt2RowStart.Text;
+            this.valueInput2.fileData = this.txt2FileData.Text;
+            this.valueInput2.colModel = this.txt2ColModel.Text;
+            this.valueInput2.sheetName = this.txt2SheetName.Text;
+
+            
         }
+        private void btn2ActionMain_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.actionButton(false);
+                this.updateLable("Thực hiện validate dữ liệu");
+                this.GetDataInput_2();//Thuc hien lay du lieu
+                
+                string resultTemp = Action2.ValidateInputAction2(ref this.valueInput2);
+                if (!resultTemp.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultTemp, "Validate Input Action 2", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                this.updateLable("Lấy dữ liệu file Kyocera...");
+                List<DataKyocera> listKyocrea = new List<DataKyocera>();
+                resultTemp = Action2.GetKyoceraOld(this.valueInput2, ref listKyocrea);
+                if (!resultTemp.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultTemp, "Get Data Action 2", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                this.updateLable("Xử lý dữ liệu Kyocera....");
+                resultTemp = Action2.ExecuteKyocera(ref listKyocrea);
+                if (!resultTemp.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultTemp, "Execute Data Kyocera", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                resultTemp = Action2.WriteKyocera_2(listKyocrea);
+
+                string k = "0";
+
+
+
+            }
+            finally
+            {
+                this.actionButton(true);
+            }
+        }
+
+        
     }
 }
