@@ -19,6 +19,7 @@ namespace QA_REPORT_MONTHLY.MODEL
         public static string CONFIG_FILE_RESULT;
 
         public static string CONFIG_2_COLUMM_MODEL;
+        public static string CONFIG_2_FILE_TEMPLATE;//Ten file template
 
     }
 }

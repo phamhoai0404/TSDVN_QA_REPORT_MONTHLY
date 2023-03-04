@@ -96,6 +96,8 @@ namespace GUI
             DataConfig.CONFIG_FILE_ERROR_PASSWORD = getConfig["FileError_Password"].ToString();
             DataConfig.CONFIG_FILE_TEMPLATE = getConfig["FileTemplate"].ToString();
 
+            DataConfig.CONFIG_2_FILE_TEMPLATE = getConfig["2FileTemplate"].ToString();
+
             //DataConfig.CONFIG_MONTH = DateTime.Now.ToString("MM");
             DataConfig.CONFIG_MONTH = "02";
 
@@ -468,8 +470,15 @@ namespace GUI
                     MessageBox.Show(resultTemp, "Execute Data Kyocera", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                resultTemp = Action2.WriteKyocera_2(listKyocrea);
+                this.updateLable("Ghi dữ liệu Kyocera");
 
+                resultTemp = ActionWrite.CreateFile_2();//Tao file
+                resultTemp = ActionWrite.WriteKyocera_2(listKyocrea);
+                if (!resultTemp.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultTemp, "Write Kyocera", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 string k = "0";
 
 

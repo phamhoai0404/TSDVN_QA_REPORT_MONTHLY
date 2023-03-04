@@ -296,5 +296,10 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 return string.Format(RESULT.ERROR_015_CATCH, "ExecuteKyocera", ex.Message);
             }
         }
+
+        internal static string WriteKyocera_2(List<DataKyocera> listKyocrea)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
