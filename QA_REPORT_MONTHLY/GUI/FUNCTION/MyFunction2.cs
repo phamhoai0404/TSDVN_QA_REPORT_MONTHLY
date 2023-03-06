@@ -4,6 +4,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 using QA_REPORT_MONTHLY.MODEL;
@@ -58,9 +59,13 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     ofd.Filter = MdlComment.TYPE_FILE_SELECT;
                     if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        FileInfo fileInfo = new FileInfo(ofd.FileName);
-                        string fileName = fileInfo.FullName;
-                        return ofd.FileName;
+                        string s = ofd.FileName;
+                        int index = s.IndexOf(':') + 1;
+                        string rootPath = GetUNCPath(s.Substring(0, index));
+                        string directory = s.Substring(index);
+                        return rootPath + directory;
+
+                       
                     }
                 }
                 return RESULT.OK;
@@ -95,5 +100,31 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
 
         }
+        /// <summary>
+        /// Chuyen doi tu (vd P: => \\192.168.3.6\public)
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string GetUNCPath(string path)
+        {
+            if (path.StartsWith(@"\\"))
+            {
+                return path;
+            }
+
+            ManagementObject mo = new ManagementObject();
+            mo.Path = new ManagementPath(String.Format("Win32_LogicalDisk='{0}'", path));
+
+            // DriveType 4 = Network Drive
+            if (Convert.ToUInt32(mo["DriveType"]) == 4)
+            {
+                return Convert.ToString(mo["ProviderName"]);
+            }
+            else
+            {
+                return path;
+            }
+        }
+
     }
 }

@@ -81,6 +81,8 @@ namespace GUI
             this.btn3RefreshAll = new System.Windows.Forms.Button();
             this.btn3ActionMain = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.txt3Month = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.btn3SelectFileError = new System.Windows.Forms.Button();
             this.txt3FileError = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -88,21 +90,19 @@ namespace GUI
             this.btn3SelectFileData = new System.Windows.Forms.Button();
             this.txt3SheetName = new System.Windows.Forms.TextBox();
             this.txt3RowEnd = new System.Windows.Forms.TextBox();
+            this.txt3ColWrite = new System.Windows.Forms.TextBox();
             this.txt3ColModel = new System.Windows.Forms.TextBox();
             this.txt3RowStart = new System.Windows.Forms.TextBox();
             this.txt3FileInput = new System.Windows.Forms.TextBox();
             this.txt3FileData = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.txt3Month = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txt3ColWrite = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -518,6 +518,7 @@ namespace GUI
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Nguồn dữ liệu";
+           // this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // btn2SelectFile
             // 
@@ -548,14 +549,14 @@ namespace GUI
             // 
             // txt2ColModel
             // 
-            this.txt2ColModel.Location = new System.Drawing.Point(180, 73);
+            this.txt2ColModel.Location = new System.Drawing.Point(137, 73);
             this.txt2ColModel.Name = "txt2ColModel";
             this.txt2ColModel.Size = new System.Drawing.Size(93, 22);
             this.txt2ColModel.TabIndex = 1;
             // 
             // txt2RowStart
             // 
-            this.txt2RowStart.Location = new System.Drawing.Point(330, 73);
+            this.txt2RowStart.Location = new System.Drawing.Point(372, 73);
             this.txt2RowStart.Name = "txt2RowStart";
             this.txt2RowStart.Size = new System.Drawing.Size(89, 22);
             this.txt2RowStart.TabIndex = 1;
@@ -588,7 +589,7 @@ namespace GUI
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(177, 54);
+            this.label9.Location = new System.Drawing.Point(134, 54);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 16);
             this.label9.TabIndex = 0;
@@ -597,7 +598,7 @@ namespace GUI
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(327, 54);
+            this.label4.Location = new System.Drawing.Point(369, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 16);
             this.label4.TabIndex = 0;
@@ -692,6 +693,22 @@ namespace GUI
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Nguồn dữ liệu";
             // 
+            // txt3Month
+            // 
+            this.txt3Month.Location = new System.Drawing.Point(127, 33);
+            this.txt3Month.Name = "txt3Month";
+            this.txt3Month.Size = new System.Drawing.Size(40, 22);
+            this.txt3Month.TabIndex = 107;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(26, 39);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(103, 16);
+            this.label19.TabIndex = 106;
+            this.label19.Text = "Tháng báo cáo:";
+            // 
             // btn3SelectFileError
             // 
             this.btn3SelectFileError.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -760,7 +777,13 @@ namespace GUI
             this.txt3RowEnd.Name = "txt3RowEnd";
             this.txt3RowEnd.Size = new System.Drawing.Size(90, 22);
             this.txt3RowEnd.TabIndex = 1;
-         //   this.txt3RowEnd.TextChanged += new System.EventHandler(this.txt3RowEnd_TextChanged);
+            // 
+            // txt3ColWrite
+            // 
+            this.txt3ColWrite.Location = new System.Drawing.Point(228, 94);
+            this.txt3ColWrite.Name = "txt3ColWrite";
+            this.txt3ColWrite.Size = new System.Drawing.Size(93, 22);
+            this.txt3ColWrite.TabIndex = 1;
             // 
             // txt3ColModel
             // 
@@ -808,6 +831,15 @@ namespace GUI
             this.label12.TabIndex = 0;
             this.label12.Text = "Dòng kết thúc:";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(226, 75);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(94, 16);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "Cột ghi dữ liệu:";
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -852,38 +884,6 @@ namespace GUI
             this.label16.Size = new System.Drawing.Size(293, 24);
             this.label16.TabIndex = 106;
             this.label16.Text = "TOSHIBA GHI BẢNG TỔNG HỢP";
-            // 
-            // txt3Month
-            // 
-            this.txt3Month.Location = new System.Drawing.Point(180, 36);
-            this.txt3Month.Name = "txt3Month";
-            this.txt3Month.Size = new System.Drawing.Size(40, 22);
-            this.txt3Month.TabIndex = 107;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(26, 39);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(103, 16);
-            this.label19.TabIndex = 106;
-            this.label19.Text = "Tháng báo cáo:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(226, 75);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(94, 16);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "Cột ghi dữ liệu:";
-            // 
-            // txt3ColWrite
-            // 
-            this.txt3ColWrite.Location = new System.Drawing.Point(228, 94);
-            this.txt3ColWrite.Name = "txt3ColWrite";
-            this.txt3ColWrite.Size = new System.Drawing.Size(93, 22);
-            this.txt3ColWrite.TabIndex = 1;
             // 
             // frmMain
             // 

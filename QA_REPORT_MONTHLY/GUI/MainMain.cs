@@ -102,8 +102,8 @@ namespace GUI
 
             DataConfig.CONFIG_3_COLUMM_MODEL = getConfig["3ColumnModel"].ToString();
 
-            //DataConfig.CONFIG_MONTH = DateTime.Now.ToString("MM");
-            DataConfig.CONFIG_MONTH = "02";
+            DataConfig.CONFIG_MONTH = DateTime.Now.AddMonths(-1).ToString("MM");
+            //DataConfig.CONFIG_MONTH = "02";//Day la tam thoi test cho nhanh thoi
 
             DataConfig.CONFIG_2_COLUMM_MODEL = getConfig["2ColumnMode"].ToString();
 
@@ -316,29 +316,7 @@ namespace GUI
                         return;
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                MessageBox.Show("Thực hiện tạo thành công file: " + DataConfig.CONFIG_FILE_RESULT, "Successful 1", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -496,10 +474,11 @@ namespace GUI
                     MessageBox.Show(resultTemp, "Write Kyocera", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                string k = "0";
-
-
-
+                MessageBox.Show("Thực hiện tạo thành công KYOCERA ở file: " + DataConfig.CONFIG_FILE_RESULT, "Successful 2", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra vui lòng liên hệ bộ phận IT để được hỗ trợ!" + ex.Message, "Run Program", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -617,8 +596,12 @@ namespace GUI
                 }
 
 
-                MessageBox.Show("Thực hiện ghi thành công TOSHIBA ở file: " + DataConfig.CONFIG_FILE_RESULT , "Successfull", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thực hiện ghi thành công TOSHIBA ở file: " + DataConfig.CONFIG_FILE_RESULT , "Successfull 3", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra vui lòng liên hệ bộ phận IT để được hỗ trợ!" + ex.Message, "Run Program", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -645,7 +628,5 @@ namespace GUI
         {
             this.ClickSelectFile(MdlComment.CLICK_3_FILE_ERROR);
         }
-
-
     }
 }
