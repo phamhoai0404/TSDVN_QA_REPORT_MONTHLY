@@ -24,9 +24,9 @@ namespace QA_REPORT_MONTHLY.MODEL
         public const string ERROR_COLUMN_G = "Bạn chưa nhập khách hàng ở địa chỉ Cột G dòng: {0} - Lỗi catch: {1}";
         public const string ERROR_COLUMN_C = "Bạn chưa nhập Chi  tiết Mã khách hàng ở địa chỉ Cột C dòng: {0} - Lỗi catch: {1}";
 
-        public const string ERROR_FILE_ERROR_WO = "Trong file lỗi tồn tại WO: {0}  trong file dữ liệu!  Chi tiết dòng dữ liệu lỗi: {1}";
+        public const string ERROR_FILE_ERROR_WO = "Trong file lỗi tồn tại WO: {0}  không tồn tại trong file dữ liệu (G2)!  Chi tiết dòng dữ liệu lỗi: {1}";
 
-        public const string ERROR_FILE_ERROR_MODEL = "Không tồn tại model: {0} - trong dữ liệu mà chỉ tồn tại trên file lỗi!";
+        public const string ERROR_FILE_ERROR_MODEL = "Không tồn tại model: {0} - trong dữ liệu G2 mà chỉ tồn tại trên file lỗi!";
 
         public const string ERROR_FILE_ERROR_NOT_COMMENT = "Không có comment khi thuộc loại Thừa thiếu linh kiện ở dòng: {0}";
         public const string ERROR_FILE_ERROR_COMMENT_NOT_RULE = "Dòng: {0} - thuộc linh kiện thiếu thừa nhưng note không theo quy tắc (chứa từ thiếu thừa) - note: {1}";

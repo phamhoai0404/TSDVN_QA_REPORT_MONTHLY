@@ -57,7 +57,14 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
         }
 
-
+        /// <summary>
+        /// Hanh dong lay du lieu cua file Data (G2)
+        /// </summary>
+        /// <param name="valueInput"></param>
+        /// <param name="sheetName"></param>
+        /// <param name="listData"></param>
+        /// <returns></returns>
+        /// CreatedBy: HoaiPT(06/03/2023)
         public static string OpenFileExcelData(ActionInput1 valueInput, string sheetName, ref List<DataFirst> listData)
         {
             Excel.Application app = null;
@@ -68,6 +75,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 app = new Excel.Application();
                 wb = app.Workbooks.Open(valueInput.fileData, ReadOnly: true);
 
+                //Kiem tra su ton tai cua sheetname thang
                 bool existSheetName = false;
                 foreach (Excel._Worksheet sheet in wb.Worksheets)
                 {
@@ -81,48 +89,48 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     return string.Format(RESULT.ERROR_SHEETNAME, sheetName);
                 }
-
                 ws = wb.Sheets[sheetName];
 
-                int rowCurrent = 4;
+                int rowCurrent = 4;//Du lieu lay bat dau tu dong thu 4
                 string check = ws.Cells[rowCurrent, "D"].Value;
                 DataFirst temp = new DataFirst();
-                while (!string.IsNullOrWhiteSpace(check))
+                while (!string.IsNullOrWhiteSpace(check))//Kiem  tra xem dong WO co ton  tai hay khong neu khong ton tai thi dung du lieu
                 {
-                    temp.wo = check;
-                    temp.model = ws.Cells[rowCurrent, "B"].Value;
+                    temp.wo = check;//Du lieu WO
+                    temp.model = ws.Cells[rowCurrent, "B"].Value;//Du lieu model
                     try
                     {
                         temp.cusDetail = ws.Cells[rowCurrent, "C"].Value;
                     }
-                    catch (Exception exs)
+                    catch (Exception exs)//Neu nhay vao catch thi chung to chua co chi tiet cua ma khach hang
                     {
                         return string.Format(RESULT.ERROR_COLUMN_C, rowCurrent, exs.Message);
                     }
 
-                    temp.qty = Convert.ToInt64(ws.Cells[rowCurrent, "F"].Value);
+                    temp.qty = Convert.ToInt64(ws.Cells[rowCurrent, "F"].Value);//Lay so luong nhap vao cua WO
 
                     try
                     {
-                        temp.cusCode = ws.Cells[rowCurrent, "G"].Value;
+                        temp.cusCode = ws.Cells[rowCurrent, "G"].Value;//khach hang o cot G neu = 0 thi khong phai khach hang nhay vao catch
                     }
                     catch (Exception exs)
                     {
                         return string.Format(RESULT.ERROR_COLUMN_G, rowCurrent, exs.Message);
                     }
 
-                    listData.Add(new DataFirst(temp));
+                    listData.Add(new DataFirst(temp));//Thuc hien luu du lieu
 
-                    rowCurrent++;
-                    check = ws.Cells[rowCurrent, "D"].Value;
+                    rowCurrent++;//Tang dong len
+                    check = ws.Cells[rowCurrent, "D"].Value;//Gan vao check
                 }
 
                 wb.Close(false);
+                app.Quit();
                 return RESULT.OK;
             }
             catch (Exception ex)
             {
-                return string.Format(RESULT.ERROR_015_CATCH, ex.Message);
+                return string.Format(RESULT.ERROR_015_CATCH, "OpenFileExcelData 1",  ex.Message);
             }
             finally
             {
@@ -152,17 +160,17 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             {
                 app = new Excel.Application();
                 wb = app.Workbooks.Open(valueInput.fileError);
-                ws = wb.Sheets[DataConfig.CONFIG_FILE_ERROR_SHEETNAME];
+                ws = wb.Sheets[DataConfig.CONFIG_FILE_ERROR_SHEETNAME];//Thuc hien gan vao ws
 
                 //Thuc hien lay dong cuoi cung co du lieu
-                if (ws.AutoFilter != null)
+                if (ws.AutoFilter != null)//Loai bo loc neu co
                 {
                     ws.Unprotect(DataConfig.CONFIG_FILE_ERROR_PASSWORD);
                     ws.AutoFilterMode = false;
                 }
-                int lastRow = ws.Cells[ws.Rows.Count, "P"].End(Excel.XlDirection.xlUp).Row;
+                int lastRow = ws.Cells[ws.Rows.Count, "P"].End(Excel.XlDirection.xlUp).Row;//Thuc hien lay dong cuoi cung
 
-                DataError err = new DataError();
+                DataError err = new DataError();//Check du lieu bat dau tu dong 11
                 for (int i = 11; i <= lastRow; i++)
                 {
                     //Neu dong du lieu Model trong thi duyet sang dong khac
@@ -190,16 +198,15 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                         continue;
                     }
 
-
                     //Lay so luong loi
                     int tempQty;
                     if (!int.TryParse(Convert.ToString(ws.Cells[i, "Z"].value), out tempQty))
                     {
-                        continue;
+                        continue;//Neu khong phai la so thi chuyen sang dong tiep theo
                     }
                     if (tempQty <= 0)
                     {
-                        continue;
+                        continue;//Neu so luong <=0 thi chuyen sang dong tiep theo
                     }
                     err.qty = tempQty;
 
@@ -231,8 +238,6 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                                     return string.Format(RESULT.ERROR_FILE_ERROR_COMMENT_NOT_RULE, i, comment.Text());
 
                             }
-
-
                         }
                     }
 
@@ -240,6 +245,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
 
                 wb.Close(false);
+                app.Quit();
                 return RESULT.OK;
             }
             catch (Exception ex)
@@ -262,7 +268,13 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
             }
         }
-
+        /// <summary>
+        /// Thuc hien ghep KHAC HANG cho tat cac loi
+        /// </summary>
+        /// <param name="listData"></param>
+        /// <param name="listError"></param>
+        /// <returns></returns>
+        /// CreatedBy: HoaiPT(06/03/2023)
         public static string ActionFileError(List<DataFirst> listData, ref List<DataError> listError)
         {
             try
@@ -291,7 +303,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
             catch (Exception ex)
             {
-                return string.Format(RESULT.ERROR_015_CATCH, "ActionFileError", ex.Message);
+                return string.Format(RESULT.ERROR_015_CATCH, "ActionFileError 1", ex.Message);
             }
         }
 
@@ -299,26 +311,26 @@ namespace QA_REPORT_MONTHLY.FUNCTION
         {
             try
             {
-                var listChildData = listData.Where(x => x.cusCode.Equals("TSB")).ToList();
-                var listChildErr = listError.Where(x => x.cusCode.Equals("TSB")).ToList();
+                var listChildData = listData.Where(x => x.cusCode.Equals("TSB")).ToList();//Lay du lieu trong file ket qua
+                var listChildErr = listError.Where(x => x.cusCode.Equals("TSB")).ToList();//Lay du lieu trong file loi
 
                 //Phan lay du lieu cua model xong roi
                 foreach (var item in listChildData.ToArray())
                 {
-                    string tempModel = item.model.Substring(0, 9);
-                    var check = listTSB.FirstOrDefault(p => p.item.Equals(tempModel));
+                    string tempModel = item.model.Substring(0, 9);//Thuc hien model khong lay ver
+                    var check = listTSB.FirstOrDefault(p => p.item.Equals(tempModel));//Kiem tra xem model da ton tai trong listTSB
                     if (check != null)
                     {
                         continue;
-                    }
+                    }//Neu ton tai roi thi chuyen sang item khac
 
+                    //Neu chua  ton tai thi thuc hien lay du lieu va add vao trong list TSB
                     long qtySum = listChildData.Where(p => p.model.Substring(0, 9) == tempModel).Sum(p => p.qty);
-
                     string tempCus = item.cusDetail.Substring(0, item.cusDetail.IndexOf(")", 2) + 1);
                     listTSB.Add(new DataTSB(tempModel, tempCus, qtySum));
                 }
 
-                foreach (var item in listChildErr)
+                foreach (var item in listChildErr)//Duyet cac item ton tai trong trong ma loi
                 {
                     string tempModel = item.model.Substring(0, 9);
                     bool check = false;
@@ -328,31 +340,31 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                         {
                             switch (item.nameError)
                             {
-                                case string s when s.Equals("Bắc cầu"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_BAC_CAU):
                                     itemTSB.qty4BrightMake += item.qty;
                                     break;
-                                case string s when s.Equals("Bong, vỡ LK"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_BONG_VO_LK):
                                     itemTSB.qty12Peel += item.qty;
                                     break;
-                                case string s when s.Equals("Dị vật"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_DI_VAT):
                                     itemTSB.qty10OjectForeign += item.qty;
                                     break;
-                                case string s when s.Equals("Giả hàn"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_GIA_HAN):
                                     itemTSB.qty1WeldFake += item.qty;
                                     break;
-                                case string s when s.Equals("Kênh, Nghiêng"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_KENH_NGHIENG):
                                     itemTSB.qty3Warp += item.qty;
                                     break;
-                                case string s when s.Equals("Không hàn"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_KHONG_HAN):
                                     itemTSB.qty1WeldFake += item.qty;
                                     break;
-                                case string s when s.Equals("Ngược hướng"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_NGUOC_HUONG):
                                     itemTSB.qty8Reverse += item.qty;
                                     break;
-                                case string s when s.Equals("Thiếu thiếc"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_THIEU_THIEC):
                                     itemTSB.qty5TinSmall += item.qty;
                                     break;
-                                case string s when s.Equals("Thừa, thiếu LK"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_THUA_THIEU_LK):
                                     if (item.typeThua == true)
                                     {
                                         itemTSB.qty11ItemMiss += item.qty;
@@ -367,10 +379,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                                     itemTSB.qty13Other += item.qty;
                                     break;
                             }
-
-
-
-                            check = true;
+                            check = true;//Neu ton tai thi dung lai chuyen sang giai doan khac va check = true;
                             break;
                         }
                     }

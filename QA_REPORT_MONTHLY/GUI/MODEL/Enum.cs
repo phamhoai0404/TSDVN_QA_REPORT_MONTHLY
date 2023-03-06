@@ -24,5 +24,14 @@ namespace QA_REPORT_MONTHLY.MODEL
         public const string TYPE_ERROR_THUA_THIEU_LK = "Thừa, thiếu LK";
         public const string TYPE_ERROR_CHILD_THUA = "thừa";
         public const string TYPE_ERROR_CHILD_THIEU = "thiếu";
+
+        public const string TYPE_ERROR_BAC_CAU = "Bắc cầu";
+        public const string TYPE_ERROR_BONG_VO_LK = "Bong, vỡ LK";
+        public const string TYPE_ERROR_DI_VAT = "Dị vật";
+        public const string TYPE_ERROR_GIA_HAN = "Giả hàn";
+        public const string TYPE_ERROR_KENH_NGHIENG = "Kênh, Nghiêng";
+        public const string TYPE_ERROR_KHONG_HAN = "Không hàn";
+        public const string TYPE_ERROR_NGUOC_HUONG = "Ngược hướng";
+        public const string TYPE_ERROR_THIEU_THIEC = "Thiếu thiếc";
     }
 }

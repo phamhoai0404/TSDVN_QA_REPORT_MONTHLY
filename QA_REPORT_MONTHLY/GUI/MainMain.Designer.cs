@@ -518,7 +518,6 @@ namespace GUI
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Nguồn dữ liệu";
-           // this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // btn2SelectFile
             // 
@@ -609,9 +608,9 @@ namespace GUI
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(31, 114);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 16);
+            this.label8.Size = new System.Drawing.Size(105, 16);
             this.label8.TabIndex = 0;
-            this.label8.Text = "File Dữ liệu:";
+            this.label8.Text = "File Dữ liệu Gốc:";
             // 
             // lable
             // 

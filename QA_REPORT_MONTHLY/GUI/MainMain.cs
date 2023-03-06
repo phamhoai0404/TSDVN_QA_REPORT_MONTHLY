@@ -93,7 +93,7 @@ namespace GUI
         private void GetConfig(Dictionary<string, object> getConfig)
         {
             DataConfig.CONFIG_SOURCE_FILE_DATA = getConfig["SourceFileData"].ToString();
-            DataConfig.CONFIG_SOURCE_FILE_ERROR = getConfig["SourceFileError"].ToString();
+         
             DataConfig.CONFIG_FILE_ERROR_SHEETNAME = getConfig["FileError_SheetName"].ToString();
             DataConfig.CONFIG_FILE_ERROR_PASSWORD = getConfig["FileError_Password"].ToString();
             DataConfig.CONFIG_FILE_TEMPLATE = getConfig["FileTemplate"].ToString();
@@ -103,8 +103,7 @@ namespace GUI
             DataConfig.CONFIG_3_COLUMM_MODEL = getConfig["3ColumnModel"].ToString();
 
             DataConfig.CONFIG_MONTH = DateTime.Now.AddMonths(-1).ToString("MM");
-            //DataConfig.CONFIG_MONTH = "02";//Day la tam thoi test cho nhanh thoi
-
+            
             DataConfig.CONFIG_2_COLUMM_MODEL = getConfig["2ColumnMode"].ToString();
 
         }
@@ -113,7 +112,6 @@ namespace GUI
         {
             try
             {
-
                 this.actionButton(false);
                 this.updateLable("Thực hiện validate");
 
@@ -139,8 +137,6 @@ namespace GUI
                     return;
                 }
 
-
-
                 string sheetName = this.inputAction1.monthString + "." + DateTime.Now.ToString("yyyy");
 
                 this.updateLable("Lấy dữ liệu file data...");
@@ -149,6 +145,7 @@ namespace GUI
                 if (!resultValue.Equals(RESULT.OK))
                 {
                     MessageBox.Show(resultValue, "Get Data File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyFunction2.Skill_Process("Excel");
                     return;
                 }
 
@@ -158,11 +155,11 @@ namespace GUI
                 if (!resultValue.Equals(RESULT.OK))
                 {
                     MessageBox.Show(resultValue, "Get File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MyFunction2.Skill_Process("Excel");
                     return;
                 }
 
                 this.updateLable("Ghép khách hàng cho dữ liệu lỗi");
-
                 resultValue = Action1.ActionFileError(this.listData, ref this.listError);
                 if (!resultValue.Equals(RESULT.OK))
                 {
@@ -174,12 +171,11 @@ namespace GUI
                 resultValue = ActionWrite.CreateFile();
                 if (!resultValue.Equals(RESULT.OK))
                 {
-                    MessageBox.Show(resultValue, "Create File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(resultValue, "Create File 1", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                string hoa = DateTime.Now.ToString("hh:mm:ss");
-
+                //Thuc hien lam file cua TSB
                 if (this.chkTSB.Checked == true)
                 {
                     this.updateLable("Thực hiện lấy dữ liệu TSB");
@@ -338,12 +334,15 @@ namespace GUI
         private void btnClearAll_Click(object sender, EventArgs e)
         {
             this.SetDataFirst1();
+            this.txtFileError.Clear();
             this.SetAllCheck1();
         }
         private void btn2RefreshAll_Click(object sender, EventArgs e)
         {
             this.txt2RowEnd.Clear();
             this.txt2RowStart.Clear();
+            this.txt2SheetName.Clear();
+            this.txt2FileData.Clear();
 
             this.SetDataFirst2();
         }
@@ -360,7 +359,6 @@ namespace GUI
         private void SetDataFirst1()
         {
             this.txtFileData.Text = DataConfig.CONFIG_SOURCE_FILE_DATA;
-            this.txtFileError.Text = DataConfig.CONFIG_SOURCE_FILE_ERROR;
             this.txtMonth.Text = DataConfig.CONFIG_MONTH;
         }
         private void SetDataFirst2()
@@ -368,12 +366,12 @@ namespace GUI
 
             this.txt2ColModel.Text = DataConfig.CONFIG_2_COLUMM_MODEL;
 
-            //Du lieu test o day xoa di nha
-            this.txt2FileData.Text = @"P:\96. Share Data\99. Other\13. IT\HOAI\QA_REPORT\2023.01_Kyocera様月報 - CUT.xlsx";
-            this.txt2RowEnd.Text = "488";
-            this.txt2RowStart.Text = "411";
-            this.txt2SheetName.Text = "部品コード";
-            this.tabMain.SelectedIndex = 1;
+            ////Du lieu test o day xoa di nha
+            //this.txt2FileData.Text = @"P:\96. Share Data\99. Other\13. IT\HOAI\QA_REPORT\2023.01_Kyocera様月報 - CUT.xlsx";
+            //this.txt2RowEnd.Text = "488";
+            //this.txt2RowStart.Text = "411";
+            //this.txt2SheetName.Text = "部品コード";
+            //this.tabMain.SelectedIndex = 1;
         }
         #endregion
 
@@ -492,22 +490,23 @@ namespace GUI
             this.txt3RowEnd.Clear();
             this.txt3RowStart.Clear();
             this.txt3SheetName.Clear();
+            this.txt3FileError.Clear();
+            this.txt3ColWrite.Clear();
+            this.txt3FileInput.Clear();
+            
         }
         private void SetDataDefault_3()
         {
             this.txt3FileData.Text = DataConfig.CONFIG_SOURCE_FILE_DATA;
-            this.txt3FileError.Text = DataConfig.CONFIG_SOURCE_FILE_ERROR;
             this.txt3ColModel.Text = DataConfig.CONFIG_3_COLUMM_MODEL;
             this.txt3Month.Text = DataConfig.CONFIG_MONTH;
 
-            //Data du lieu gia o day neu dung thi xoa di nha
-            //D
-            //...//lam o day nho
-            this.tabMain.SelectedIndex = 2;
-            this.txt3SheetName.Text = "hoa";
-            this.txt3RowEnd.Text = "100";
-            this.txt3RowStart.Text = "10";
-            this.txt3FileInput.Text = @"P:\96. Share Data\99. Other\13. IT\HOAI\QA_REPORT\01.2023 TOSHIBA   REPORT.xlsx";
+            ////Data du lieu gia o day neu dung thi xoa di nha
+            //this.tabMain.SelectedIndex = 2;
+            //this.txt3SheetName.Text = "hoa";
+            //this.txt3RowEnd.Text = "100";
+            //this.txt3RowStart.Text = "10";
+            //this.txt3FileInput.Text = @"P:\96. Share Data\99. Other\13. IT\HOAI\QA_REPORT\01.2023 TOSHIBA   REPORT.xlsx";
         }
         private void GetDataInput_3()
         {
