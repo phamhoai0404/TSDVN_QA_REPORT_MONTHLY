@@ -21,5 +21,7 @@ namespace QA_REPORT_MONTHLY.MODEL
         public static string CONFIG_2_COLUMM_MODEL;
         public static string CONFIG_2_FILE_TEMPLATE;//Ten file template
 
+        public static string CONFIG_3_COLUMM_MODEL;//Column mac dinh file
+
     }
 }

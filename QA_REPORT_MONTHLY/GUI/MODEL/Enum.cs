@@ -13,6 +13,12 @@ namespace QA_REPORT_MONTHLY.MODEL
         public const string CLICK_FILE_DATA = "CLICK_FILE_DATA";
         public const string CLICK_FILE_ERROR = "CLICK_FILE_ERROR";
 
+        public const string CLICK_2_FILE_DATA = "CLICK_2_FILE_DATA";
+
+        public const string CLICK_3_FILE_DATA = "CLICK_3_FILE_DATA";
+        public const string CLICK_3_FILE_ERROR = "CLICK_3_FILE_ERROR";
+        public const string CLICK_3_FILE_SOURCE = "CLICK_3_FILE_SOURCE";
+
 
 
         public const string TYPE_ERROR_THUA_THIEU_LK = "Thừa, thiếu LK";

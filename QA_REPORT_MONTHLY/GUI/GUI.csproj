@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="FUNCTION\Action1.cs" />
     <Compile Include="FUNCTION\Action2.cs" />
+    <Compile Include="FUNCTION\Action3.cs" />
     <Compile Include="FUNCTION\MyFunction1.cs" />
     <Compile Include="FUNCTION\MyFunction2.cs" />
     <Compile Include="MainMain.cs">

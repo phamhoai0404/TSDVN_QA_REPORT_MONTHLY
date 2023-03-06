@@ -6,6 +6,27 @@ using System.Threading.Tasks;
 
 namespace QA_REPORT_MONTHLY.MODEL
 {
+    public class DataTSB3
+    {
+        public string item { get; set; }
+        public long qtySum { get; set; }
+        public int qtyErrorSum { get; set; }
+        public bool action { get; set; }
+
+
+        public DataTSB3() { }
+        public DataTSB3(string item, long qtySum, int qtyErrorSum)
+        {
+            this.item = item;
+            this.qtySum = qtySum;
+            this.qtyErrorSum = qtyErrorSum;
+        }
+        public override string ToString()
+        {
+            return item.ToString() + "," + qtySum +"," + qtyErrorSum +";";
+        }
+    }
+
     public class DataTSB
     {
         public string item { get; set; }
@@ -31,6 +52,8 @@ namespace QA_REPORT_MONTHLY.MODEL
         {
 
         }
+
+
         public DataTSB(string item, string cus, long qtySum)
         {
             this.item = item;

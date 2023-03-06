@@ -131,10 +131,10 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
                     ws.Range["C" + rowCurrent + ":D" + rowCurrent].Merge();
                     ws.Range["F" + rowCurrent + ":G" + rowCurrent].Merge();
-                    
+
                     ws.Range["V" + rowCurrent + ":W" + rowCurrent].Merge();
 
-                    ws.Cells[rowCurrent, "F"].Formula = string.Format("=E{0}/C{0}*1000000",rowCurrent);
+                    ws.Cells[rowCurrent, "F"].Formula = string.Format("=E{0}/C{0}*1000000", rowCurrent);
                     ws.Cells[rowCurrent, "E"].Formula = string.Format("=SUM(I{0}:U{0}", rowCurrent);
                     rowCurrent++;
                 }
@@ -212,11 +212,11 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 int rowCurrent = 3;
                 foreach (var item in listKyocera)
                 {
-                    ws.Cells[rowCurrent, "A"].value = item.item + "("+ item.cus + ")";
+                    ws.Cells[rowCurrent, "A"].value = item.item + "(" + item.cus + ")";
                     ws.Cells[rowCurrent, "B"].value = item.qtySum;
                     ws.Cells[rowCurrent, "E"].value = 80;
 
-                   // int columnStart = 6;
+                    // int columnStart = 6;
                     if (item.qty1WeldFake != 0)
                     {
                         ws.Cells[rowCurrent, 6].value = item.qty1WeldFake;
@@ -324,7 +324,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 ws.Cells[rowCurrent, "P"].Formula = @"= SUM(P3:P" + (rowCurrent - 1) + ")";
                 ws.Cells[rowCurrent, "Q"].Formula = @"= SUM(Q3:Q" + (rowCurrent - 1) + ")";
                 ws.Cells[rowCurrent, "R"].Formula = @"= SUM(R3:R" + (rowCurrent - 1) + ")";
-                
+
 
                 ws.Cells[rowCurrent, "D"].Formula = string.Format("=C{0}/B{0}*1000000", rowCurrent);
 
@@ -380,7 +380,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 int rowCurrent = 3;
                 foreach (var item in listFX)
                 {
-                    ws.Cells[rowCurrent, "A"].value = item.item  + item.cus;
+                    ws.Cells[rowCurrent, "A"].value = item.item + item.cus;
                     ws.Cells[rowCurrent, "B"].value = item.qtySum;
                     ws.Cells[rowCurrent, "E"].value = 80;
 
@@ -409,7 +409,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                         ws.Cells[rowCurrent, 10].value = item.qty5TinSmall;
                     }
 
-                    
+
 
                     if (item.qty8Reverse != 0)
                     {
@@ -481,7 +481,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 ws.Cells[rowCurrent, "N"].Formula = @"= SUM(N3:N" + (rowCurrent - 1) + ")";
                 ws.Cells[rowCurrent, "O"].Formula = @"= SUM(O3:O" + (rowCurrent - 1) + ")";
                 ws.Cells[rowCurrent, "P"].Formula = @"= SUM(P3:P" + (rowCurrent - 1) + ")";
-              
+
 
 
                 ws.Cells[rowCurrent, "D"].Formula = string.Format("=C{0}/B{0}*1000000", rowCurrent);
@@ -521,7 +521,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
         }
 
-       
+
 
         public static string WriteHT(DataHT valueHT, string month)
         {
@@ -545,7 +545,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 ws.Cells[rowCurrent, "E"].value = 100;
                 ws.Cells[rowCurrent, "F"].Formula = string.Format("=IF(D{0}=\"\",\"\",D{0}/C{0}*1000000)", rowCurrent);
 
-                if(valueHT.qty8Reverse != 0)
+                if (valueHT.qty8Reverse != 0)
                 {
                     ws.Cells[rowCurrent, "G"].value = valueHT.qty8Reverse;
                 }
@@ -673,7 +673,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     ws.Cells[rowCurrent, "Q"].value = valueOkidenki.qty11ItemMiss;
                 }
-                if (valueOkidenki.qty12Peel!= 0)
+                if (valueOkidenki.qty12Peel != 0)
                 {
                     ws.Cells[rowCurrent, "R"].value = valueOkidenki.qty12Peel;
                 }
@@ -716,6 +716,9 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
             }
         }
+
+
+
         public static string WriteRiso(DataRiso valueRiso, string month)
         {
             Excel.Application app = null;
@@ -852,7 +855,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     ws.Cells[rowCurrent, "H"].value = valueJCM.qty14LechLK;
                 }
-                
+
                 if (valueJCM.qty4BrightMake != 0)
                 {
                     ws.Cells[rowCurrent, "J"].value = valueJCM.qty4BrightMake;
@@ -875,7 +878,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     ws.Cells[rowCurrent, "N"].value = valueJCM.qty11ItemMiss;
                 }
-                
+
                 if (valueJCM.qty10OjectForeign != 0)
                 {
                     ws.Cells[rowCurrent, "P"].value = valueJCM.qty10OjectForeign;
@@ -884,7 +887,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     ws.Cells[rowCurrent, "Q"].value = valueJCM.qty12Peel;
                 }
-                
+
                 if (valueJCM.qty13Other != 0)
                 {
                     ws.Cells[rowCurrent, "S"].value = valueJCM.qty13Other;
@@ -1108,6 +1111,103 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
                 }
             }
+        }
+
+
+        public static string CreateFile_3(string fileName)
+        {
+            string currentPath = Directory.GetCurrentDirectory();
+            string pathTemplate = fileName;
+            DataConfig.CONFIG_FILE_RESULT = DateTime.Now.ToString("3_ddMMyyyy_HHmmss");
+            DataConfig.CONFIG_FILE_RESULT = currentPath + @"\RESULT\" + DataConfig.CONFIG_FILE_RESULT + ".xlsx";
+
+            Excel.Application excel = new Excel.Application();
+            Excel.Workbook originalWorkbook = excel.Workbooks.Open(pathTemplate);
+
+            originalWorkbook.SaveCopyAs(DataConfig.CONFIG_FILE_RESULT);
+            originalWorkbook.Close(false);
+            excel.Quit();
+
+            return RESULT.OK;
+        }
+        public static string WriteTSB_3(ActionInput3 valueInput, ref List<DataTSB3>  listDataTSB)
+        {
+            CreateFile_3(valueInput.fileInput);//Thuc hien tao file
+
+            Excel.Application app = null;
+            Excel.Workbook wb = null;
+            Excel.Worksheet ws = null;
+            Excel.Range range = null;
+
+
+            try
+            {
+                app = new Excel.Application();
+                wb = app.Workbooks.Open(DataConfig.CONFIG_FILE_RESULT);
+
+                ws = wb.Sheets[valueInput.sheetName];
+
+                string colModel = valueInput.colModel;
+                string colWrite = valueInput.colWrite;
+                for (int i = valueInput.rowStart; i <= valueInput.rowEnd; i = i + 2)
+                {
+                    string tempModel = ws.Cells[i, colModel].value;
+                    if (string.IsNullOrWhiteSpace(tempModel))
+                    {
+                        return string.Format(RESULT.ERROR_2_NOT_NULL_MODEL, i);
+                    }
+                    var tempObject = new DataTSB3();
+                    foreach (var currentRow in listDataTSB)
+                    {
+                        if (currentRow.item.Equals(tempModel)){
+                            currentRow.action = true;
+                            tempObject = currentRow;
+                            break;
+                        }
+                    }
+
+                    ws.Cells[i, colWrite].value = tempObject.qtySum;
+                    ws.Cells[i + 1, colWrite].value = tempObject.qtyErrorSum;
+
+
+                    ws.Cells[i, colWrite].Borders[Excel.XlBordersIndex.xlDiagonalUp].LineStyle = Excel.XlLineStyle.xlLineStyleNone; ;
+                    ws.Cells[i + 1, colWrite].Borders[Excel.XlBordersIndex.xlDiagonalUp].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
+
+                }
+
+
+
+                wb.Save();
+
+                wb.Close();
+                app.Quit();
+
+                return RESULT.OK;
+            }
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "WriteKyocera_2", ex.Message);
+            }
+            finally
+            {
+                if (range != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(range);
+                }
+                if (ws != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(ws);
+                }
+                if (wb != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(wb);
+                }
+                if (app != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
+                }
+            }
+
         }
     }
 }

@@ -66,17 +66,43 @@ namespace GUI
             this.btn2ActionMain = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn2SelectFile = new System.Windows.Forms.Button();
+            this.txt2SheetName = new System.Windows.Forms.TextBox();
             this.txt2RowEnd = new System.Windows.Forms.TextBox();
             this.txt2ColModel = new System.Windows.Forms.TextBox();
             this.txt2RowStart = new System.Windows.Forms.TextBox();
             this.txt2FileData = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.lable = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txt2SheetName = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btn3RefreshAll = new System.Windows.Forms.Button();
+            this.btn3ActionMain = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btn3SelectFileError = new System.Windows.Forms.Button();
+            this.txt3FileError = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.btn3SelectSourceFile = new System.Windows.Forms.Button();
+            this.btn3SelectFileData = new System.Windows.Forms.Button();
+            this.txt3SheetName = new System.Windows.Forms.TextBox();
+            this.txt3RowEnd = new System.Windows.Forms.TextBox();
+            this.txt3ColModel = new System.Windows.Forms.TextBox();
+            this.txt3RowStart = new System.Windows.Forms.TextBox();
+            this.txt3FileInput = new System.Windows.Forms.TextBox();
+            this.txt3FileData = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txt3Month = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txt3ColWrite = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -90,6 +116,8 @@ namespace GUI
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -198,6 +226,7 @@ namespace GUI
             // 
             this.tabMain.Controls.Add(this.tabPage1);
             this.tabMain.Controls.Add(this.tabPage2);
+            this.tabMain.Controls.Add(this.tabPage3);
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabMain.Location = new System.Drawing.Point(0, 0);
@@ -501,6 +530,14 @@ namespace GUI
             this.btn2SelectFile.Size = new System.Drawing.Size(33, 29);
             this.btn2SelectFile.TabIndex = 102;
             this.btn2SelectFile.UseVisualStyleBackColor = false;
+            this.btn2SelectFile.Click += new System.EventHandler(this.btn2SelectFile_Click);
+            // 
+            // txt2SheetName
+            // 
+            this.txt2SheetName.Location = new System.Drawing.Point(31, 73);
+            this.txt2SheetName.Name = "txt2SheetName";
+            this.txt2SheetName.Size = new System.Drawing.Size(90, 22);
+            this.txt2SheetName.TabIndex = 1;
             // 
             // txt2RowEnd
             // 
@@ -508,7 +545,6 @@ namespace GUI
             this.txt2RowEnd.Name = "txt2RowEnd";
             this.txt2RowEnd.Size = new System.Drawing.Size(90, 22);
             this.txt2RowEnd.TabIndex = 1;
-           // this.txt2RowEnd.TextChanged += new System.EventHandler(this.txt2RowEnd_TextChanged);
             // 
             // txt2ColModel
             // 
@@ -516,7 +552,6 @@ namespace GUI
             this.txt2ColModel.Name = "txt2ColModel";
             this.txt2ColModel.Size = new System.Drawing.Size(93, 22);
             this.txt2ColModel.TabIndex = 1;
-           // this.txt2ColModel.TextChanged += new System.EventHandler(this.txt2ColModel_TextChanged);
             // 
             // txt2RowStart
             // 
@@ -524,7 +559,6 @@ namespace GUI
             this.txt2RowStart.Name = "txt2RowStart";
             this.txt2RowStart.Size = new System.Drawing.Size(89, 22);
             this.txt2RowStart.TabIndex = 1;
-         //   this.txt2RowStart.TextChanged += new System.EventHandler(this.txt2RowStart_TextChanged);
             // 
             // txt2FileData
             // 
@@ -532,6 +566,15 @@ namespace GUI
             this.txt2FileData.Name = "txt2FileData";
             this.txt2FileData.Size = new System.Drawing.Size(537, 22);
             this.txt2FileData.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(28, 54);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 16);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "SheetName:";
             // 
             // label7
             // 
@@ -541,7 +584,6 @@ namespace GUI
             this.label7.Size = new System.Drawing.Size(92, 16);
             this.label7.TabIndex = 0;
             this.label7.Text = "Dòng kết thúc:";
-         //  this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label9
             // 
@@ -551,7 +593,6 @@ namespace GUI
             this.label9.Size = new System.Drawing.Size(72, 16);
             this.label9.TabIndex = 0;
             this.label9.Text = "Cột Model:";
-           // this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label4
             // 
@@ -561,7 +602,6 @@ namespace GUI
             this.label4.Size = new System.Drawing.Size(92, 16);
             this.label4.TabIndex = 0;
             this.label4.Text = "Dòng bắt đầu:";
-           // this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label8
             // 
@@ -581,21 +621,269 @@ namespace GUI
             this.lable.TabIndex = 0;
             this.lable.Text = "GỘP DỮ LIỆU 2 NHÀ MÁY";
             // 
-            // label10
+            // tabPage3
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(28, 54);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(83, 16);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "SheetName:";
+            this.tabPage3.Controls.Add(this.btn3RefreshAll);
+            this.tabPage3.Controls.Add(this.btn3ActionMain);
+            this.tabPage3.Controls.Add(this.groupBox5);
+            this.tabPage3.Controls.Add(this.label16);
+            this.tabPage3.Location = new System.Drawing.Point(4, 33);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(712, 489);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Toshiba";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // txt2SheetName
+            // btn3RefreshAll
             // 
-            this.txt2SheetName.Location = new System.Drawing.Point(31, 73);
-            this.txt2SheetName.Name = "txt2SheetName";
-            this.txt2SheetName.Size = new System.Drawing.Size(90, 22);
-            this.txt2SheetName.TabIndex = 1;
+            this.btn3RefreshAll.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn3RefreshAll.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn3RefreshAll.BackgroundImage")));
+            this.btn3RefreshAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn3RefreshAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn3RefreshAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btn3RefreshAll.ForeColor = System.Drawing.Color.Navy;
+            this.btn3RefreshAll.Location = new System.Drawing.Point(37, 383);
+            this.btn3RefreshAll.Name = "btn3RefreshAll";
+            this.btn3RefreshAll.Size = new System.Drawing.Size(60, 54);
+            this.btn3RefreshAll.TabIndex = 109;
+            this.btn3RefreshAll.UseVisualStyleBackColor = false;
+            this.btn3RefreshAll.Click += new System.EventHandler(this.btn3RefreshAll_Click);
+            // 
+            // btn3ActionMain
+            // 
+            this.btn3ActionMain.Location = new System.Drawing.Point(117, 383);
+            this.btn3ActionMain.Name = "btn3ActionMain";
+            this.btn3ActionMain.Size = new System.Drawing.Size(557, 54);
+            this.btn3ActionMain.TabIndex = 108;
+            this.btn3ActionMain.Text = "GHI DỮ LIỆU";
+            this.btn3ActionMain.UseVisualStyleBackColor = true;
+            this.btn3ActionMain.Click += new System.EventHandler(this.btn3ActionMain_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.txt3Month);
+            this.groupBox5.Controls.Add(this.label19);
+            this.groupBox5.Controls.Add(this.btn3SelectFileError);
+            this.groupBox5.Controls.Add(this.txt3FileError);
+            this.groupBox5.Controls.Add(this.label17);
+            this.groupBox5.Controls.Add(this.btn3SelectSourceFile);
+            this.groupBox5.Controls.Add(this.btn3SelectFileData);
+            this.groupBox5.Controls.Add(this.txt3SheetName);
+            this.groupBox5.Controls.Add(this.txt3RowEnd);
+            this.groupBox5.Controls.Add(this.txt3ColWrite);
+            this.groupBox5.Controls.Add(this.txt3ColModel);
+            this.groupBox5.Controls.Add(this.txt3RowStart);
+            this.groupBox5.Controls.Add(this.txt3FileInput);
+            this.groupBox5.Controls.Add(this.txt3FileData);
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Controls.Add(this.label12);
+            this.groupBox5.Controls.Add(this.label20);
+            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.label14);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.label15);
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(37, 76);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(637, 289);
+            this.groupBox5.TabIndex = 107;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Nguồn dữ liệu";
+            // 
+            // btn3SelectFileError
+            // 
+            this.btn3SelectFileError.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn3SelectFileError.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn3SelectFileError.BackgroundImage")));
+            this.btn3SelectFileError.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn3SelectFileError.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn3SelectFileError.Location = new System.Drawing.Point(572, 246);
+            this.btn3SelectFileError.Name = "btn3SelectFileError";
+            this.btn3SelectFileError.Size = new System.Drawing.Size(33, 29);
+            this.btn3SelectFileError.TabIndex = 105;
+            this.btn3SelectFileError.UseVisualStyleBackColor = false;
+            this.btn3SelectFileError.Click += new System.EventHandler(this.btn3SelectFileError_Click);
+            // 
+            // txt3FileError
+            // 
+            this.txt3FileError.Location = new System.Drawing.Point(29, 249);
+            this.txt3FileError.Name = "txt3FileError";
+            this.txt3FileError.Size = new System.Drawing.Size(537, 22);
+            this.txt3FileError.TabIndex = 104;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(26, 230);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(54, 16);
+            this.label17.TabIndex = 103;
+            this.label17.Text = "File Lỗi:";
+            // 
+            // btn3SelectSourceFile
+            // 
+            this.btn3SelectSourceFile.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn3SelectSourceFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn3SelectSourceFile.BackgroundImage")));
+            this.btn3SelectSourceFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn3SelectSourceFile.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn3SelectSourceFile.Location = new System.Drawing.Point(572, 149);
+            this.btn3SelectSourceFile.Name = "btn3SelectSourceFile";
+            this.btn3SelectSourceFile.Size = new System.Drawing.Size(33, 29);
+            this.btn3SelectSourceFile.TabIndex = 102;
+            this.btn3SelectSourceFile.UseVisualStyleBackColor = false;
+            this.btn3SelectSourceFile.Click += new System.EventHandler(this.btn3SelectSourceFile_Click);
+            // 
+            // btn3SelectFileData
+            // 
+            this.btn3SelectFileData.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btn3SelectFileData.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn3SelectFileData.BackgroundImage")));
+            this.btn3SelectFileData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn3SelectFileData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn3SelectFileData.Location = new System.Drawing.Point(572, 202);
+            this.btn3SelectFileData.Name = "btn3SelectFileData";
+            this.btn3SelectFileData.Size = new System.Drawing.Size(33, 29);
+            this.btn3SelectFileData.TabIndex = 102;
+            this.btn3SelectFileData.UseVisualStyleBackColor = false;
+            this.btn3SelectFileData.Click += new System.EventHandler(this.btn3SelectFileData_Click);
+            // 
+            // txt3SheetName
+            // 
+            this.txt3SheetName.Location = new System.Drawing.Point(29, 94);
+            this.txt3SheetName.Name = "txt3SheetName";
+            this.txt3SheetName.Size = new System.Drawing.Size(90, 22);
+            this.txt3SheetName.TabIndex = 1;
+            // 
+            // txt3RowEnd
+            // 
+            this.txt3RowEnd.Location = new System.Drawing.Point(475, 94);
+            this.txt3RowEnd.Name = "txt3RowEnd";
+            this.txt3RowEnd.Size = new System.Drawing.Size(90, 22);
+            this.txt3RowEnd.TabIndex = 1;
+         //   this.txt3RowEnd.TextChanged += new System.EventHandler(this.txt3RowEnd_TextChanged);
+            // 
+            // txt3ColModel
+            // 
+            this.txt3ColModel.Location = new System.Drawing.Point(127, 94);
+            this.txt3ColModel.Name = "txt3ColModel";
+            this.txt3ColModel.Size = new System.Drawing.Size(93, 22);
+            this.txt3ColModel.TabIndex = 1;
+            // 
+            // txt3RowStart
+            // 
+            this.txt3RowStart.Location = new System.Drawing.Point(380, 94);
+            this.txt3RowStart.Name = "txt3RowStart";
+            this.txt3RowStart.Size = new System.Drawing.Size(89, 22);
+            this.txt3RowStart.TabIndex = 1;
+            // 
+            // txt3FileInput
+            // 
+            this.txt3FileInput.Location = new System.Drawing.Point(29, 152);
+            this.txt3FileInput.Name = "txt3FileInput";
+            this.txt3FileInput.Size = new System.Drawing.Size(537, 22);
+            this.txt3FileInput.TabIndex = 1;
+            // 
+            // txt3FileData
+            // 
+            this.txt3FileData.Location = new System.Drawing.Point(29, 205);
+            this.txt3FileData.Name = "txt3FileData";
+            this.txt3FileData.Size = new System.Drawing.Size(537, 22);
+            this.txt3FileData.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(26, 75);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(83, 16);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "SheetName:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(474, 75);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(92, 16);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Dòng kết thúc:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(124, 75);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(72, 16);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Cột Model:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(377, 75);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(92, 16);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Dòng bắt đầu:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(29, 133);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(98, 16);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "File ghi Dữ liệu:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(29, 186);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(77, 16);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "File Dữ liệu:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(33, 34);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(293, 24);
+            this.label16.TabIndex = 106;
+            this.label16.Text = "TOSHIBA GHI BẢNG TỔNG HỢP";
+            // 
+            // txt3Month
+            // 
+            this.txt3Month.Location = new System.Drawing.Point(180, 36);
+            this.txt3Month.Name = "txt3Month";
+            this.txt3Month.Size = new System.Drawing.Size(40, 22);
+            this.txt3Month.TabIndex = 107;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(26, 39);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(103, 16);
+            this.label19.TabIndex = 106;
+            this.label19.Text = "Tháng báo cáo:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(226, 75);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(94, 16);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "Cột ghi dữ liệu:";
+            // 
+            // txt3ColWrite
+            // 
+            this.txt3ColWrite.Location = new System.Drawing.Point(228, 94);
+            this.txt3ColWrite.Name = "txt3ColWrite";
+            this.txt3ColWrite.Size = new System.Drawing.Size(93, 22);
+            this.txt3ColWrite.TabIndex = 1;
             // 
             // frmMain
             // 
@@ -629,6 +917,10 @@ namespace GUI
             this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -682,6 +974,32 @@ namespace GUI
         private System.Windows.Forms.Button btn2ActionMain;
         private System.Windows.Forms.TextBox txt2SheetName;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button btn3RefreshAll;
+        private System.Windows.Forms.Button btn3ActionMain;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btn3SelectFileData;
+        private System.Windows.Forms.TextBox txt3SheetName;
+        private System.Windows.Forms.TextBox txt3RowEnd;
+        private System.Windows.Forms.TextBox txt3ColModel;
+        private System.Windows.Forms.TextBox txt3RowStart;
+        private System.Windows.Forms.TextBox txt3FileData;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button btn3SelectFileError;
+        private System.Windows.Forms.TextBox txt3FileError;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button btn3SelectSourceFile;
+        private System.Windows.Forms.TextBox txt3FileInput;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txt3Month;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox txt3ColWrite;
+        private System.Windows.Forms.Label label20;
     }
 }
 

@@ -21,6 +21,7 @@ namespace GUI
         }
         ActionInput1 inputAction1 = new ActionInput1();
         ActionInput2 valueInput2 = new ActionInput2();
+        ActionInput3 valueInput3 = new ActionInput3();
         List<DataFirst> listData = new List<DataFirst>();
         List<DataError> listError = new List<DataError>();
 
@@ -78,6 +79,7 @@ namespace GUI
 
                 this.btnClearAll.PerformClick();
                 this.SetDataFirst2();//Thuc hien set du lieu cho Action 2
+                this.SetDataDefault_3();//Thuc hien set du lieu cho Action 3
             }
             catch (Exception ex)
             {
@@ -98,6 +100,8 @@ namespace GUI
 
             DataConfig.CONFIG_2_FILE_TEMPLATE = getConfig["2FileTemplate"].ToString();
 
+            DataConfig.CONFIG_3_COLUMM_MODEL = getConfig["3ColumnModel"].ToString();
+
             //DataConfig.CONFIG_MONTH = DateTime.Now.ToString("MM");
             DataConfig.CONFIG_MONTH = "02";
 
@@ -109,6 +113,7 @@ namespace GUI
         {
             try
             {
+
                 this.actionButton(false);
                 this.updateLable("Thực hiện validate");
 
@@ -382,7 +387,7 @@ namespace GUI
         }
         private void SetDataFirst2()
         {
-            
+
             this.txt2ColModel.Text = DataConfig.CONFIG_2_COLUMM_MODEL;
 
             //Du lieu test o day xoa di nha
@@ -415,6 +420,18 @@ namespace GUI
                 case MdlComment.CLICK_FILE_ERROR:
                     this.txtFileError.Text = result;
                     break;
+                case MdlComment.CLICK_2_FILE_DATA:
+                    this.txt2FileData.Text = result;
+                    break;
+                case MdlComment.CLICK_3_FILE_DATA:
+                    this.txt3FileData.Text = result;
+                    break;
+                case MdlComment.CLICK_3_FILE_ERROR:
+                    this.txt3FileError.Text = result;
+                    break;
+                case MdlComment.CLICK_3_FILE_SOURCE:
+                    this.txt3FileInput.Text = result;
+                    break;
             }
 
         }
@@ -439,7 +456,7 @@ namespace GUI
             this.valueInput2.colModel = this.txt2ColModel.Text;
             this.valueInput2.sheetName = this.txt2SheetName.Text;
 
-            
+
         }
         private void btn2ActionMain_Click(object sender, EventArgs e)
         {
@@ -448,7 +465,7 @@ namespace GUI
                 this.actionButton(false);
                 this.updateLable("Thực hiện validate dữ liệu");
                 this.GetDataInput_2();//Thuc hien lay du lieu
-                
+
                 string resultTemp = Action2.ValidateInputAction2(ref this.valueInput2);
                 if (!resultTemp.Equals(RESULT.OK))
                 {
@@ -490,6 +507,145 @@ namespace GUI
             }
         }
 
-        
+        private void btn3RefreshAll_Click(object sender, EventArgs e)
+        {
+            this.SetDataDefault_3();
+            this.txt3RowEnd.Clear();
+            this.txt3RowStart.Clear();
+            this.txt3SheetName.Clear();
+        }
+        private void SetDataDefault_3()
+        {
+            this.txt3FileData.Text = DataConfig.CONFIG_SOURCE_FILE_DATA;
+            this.txt3FileError.Text = DataConfig.CONFIG_SOURCE_FILE_ERROR;
+            this.txt3ColModel.Text = DataConfig.CONFIG_3_COLUMM_MODEL;
+            this.txt3Month.Text = DataConfig.CONFIG_MONTH;
+
+            //Data du lieu gia o day neu dung thi xoa di nha
+            //D
+            //...//lam o day nho
+            this.tabMain.SelectedIndex = 2;
+            this.txt3SheetName.Text = "hoa";
+            this.txt3RowEnd.Text = "100";
+            this.txt3RowStart.Text = "10";
+            this.txt3FileInput.Text = @"P:\96. Share Data\99. Other\13. IT\HOAI\QA_REPORT\01.2023 TOSHIBA   REPORT.xlsx";
+        }
+        private void GetDataInput_3()
+        {
+            this.valueInput3.rowEndString = this.txt3RowEnd.Text;
+            this.valueInput3.rowStartString = this.txt3RowStart.Text;
+            this.valueInput3.fileData = this.txt3FileData.Text;
+            this.valueInput3.colModel = this.txt3ColModel.Text;
+            this.valueInput3.sheetName = this.txt3SheetName.Text;
+            this.valueInput3.fileError = this.txt3FileError.Text;
+            this.valueInput3.fileInput = this.txt3FileInput.Text;
+            this.valueInput3.monthString = this.txt3Month.Text;
+            this.valueInput3.colWrite = this.txt3ColWrite.Text;
+
+        }
+        private void btn3ActionMain_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.actionButton(false);
+                this.updateLable("Thực hiện lấy dữ liệu và validate");
+                this.GetDataInput_3();
+                string resultValue = Action3.ValidateInput3(ref this.valueInput3);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Validate Action 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                resultValue = Action3.CheckSheetName(this.valueInput3);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Error SheetName 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                this.updateLable("Lấy dữ liệu file data...");
+                this.listData.Clear();
+                string sheetName = this.valueInput3.monthString + "." + DateTime.Now.ToString("yyyy");
+                resultValue = Action3.OpenFileExcelData3(this.valueInput3, sheetName, ref listData);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Get Data File 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                this.updateLable("Lấy dữ liệu file lỗi.....");
+                this.listError.Clear();
+                resultValue = Action3.OpenFileExcelError(this.valueInput3, ref this.listError);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Get File Error 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                this.updateLable("Ghép khách hàng cho dữ liệu lỗi");
+                resultValue = Action3.ActionFileError(this.listData, ref this.listError);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Get File Error 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                this.updateLable("Thực hiện lấy dữ liệu TSB");
+                List<DataTSB3> listDataTSB = new List<DataTSB3>();
+                resultValue = Action3.GetTSB_3(this.listData, this.listError, ref listDataTSB);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Get Data TSB 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                this.updateLable("Thực hiện lấy ghi dữ liệu TSB...");
+                resultValue = ActionWrite.WriteTSB_3(this.valueInput3, ref listDataTSB);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show(resultValue, "Get Data TSB 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                this.updateLable("Thực hiện check item chưa tồn tại trong Input...");
+                Action3.CheckItemMiss(listDataTSB, ref resultValue);
+                if (!resultValue.Equals(RESULT.OK))
+                {
+                    MessageBox.Show("Các item này không tồn tại trong file ghi dữ liệu: " + resultValue, "Write Item Miss 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
+                MessageBox.Show("Thực hiện ghi thành công TOSHIBA ở file: " + DataConfig.CONFIG_FILE_RESULT , "Successfull", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            finally
+            {
+                this.actionButton(true);
+            }
+        }
+
+        private void btn2SelectFile_Click(object sender, EventArgs e)
+        {
+            this.ClickSelectFile(MdlComment.CLICK_2_FILE_DATA);
+        }
+
+        private void btn3SelectSourceFile_Click(object sender, EventArgs e)
+        {
+            this.ClickSelectFile(MdlComment.CLICK_3_FILE_SOURCE);
+        }
+
+        private void btn3SelectFileData_Click(object sender, EventArgs e)
+        {
+            this.ClickSelectFile(MdlComment.CLICK_3_FILE_DATA);
+        }
+
+        private void btn3SelectFileError_Click(object sender, EventArgs e)
+        {
+            this.ClickSelectFile(MdlComment.CLICK_3_FILE_ERROR);
+        }
+
+
     }
 }

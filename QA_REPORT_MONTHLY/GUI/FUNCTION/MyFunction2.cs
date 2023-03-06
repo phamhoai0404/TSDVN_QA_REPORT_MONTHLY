@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +58,8 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     ofd.Filter = MdlComment.TYPE_FILE_SELECT;
                     if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-
+                        FileInfo fileInfo = new FileInfo(ofd.FileName);
+                        string fileName = fileInfo.FullName;
                         return ofd.FileName;
                     }
                 }
