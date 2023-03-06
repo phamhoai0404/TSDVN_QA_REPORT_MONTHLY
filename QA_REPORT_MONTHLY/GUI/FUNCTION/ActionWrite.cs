@@ -44,6 +44,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 ws = wb.Sheets["TOSIBA_1"];
 
                 int rowCurrent = 3;
+                listTSB = listTSB.OrderBy(o => o.item).ToList();
                 foreach (var item in listTSB)
                 {
                     ws.Cells[rowCurrent, "A"].value = item.item + item.cus;
@@ -210,6 +211,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 ws = wb.Sheets["KYOCERA_1"];
 
                 int rowCurrent = 3;
+                listKyocera = listKyocera.OrderBy(o => o.item).ToList();
                 foreach (var item in listKyocera)
                 {
                     ws.Cells[rowCurrent, "A"].value = item.item + "(" + item.cus + ")";
@@ -378,6 +380,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 ws = wb.Sheets["FX_1"];
 
                 int rowCurrent = 3;
+                listFX = listFX.OrderBy(o => o.item).ToList();
                 foreach (var item in listFX)
                 {
                     ws.Cells[rowCurrent, "A"].value = item.item + item.cus;
@@ -1165,11 +1168,15 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                             break;
                         }
                     }
+                    if(tempObject== null)//Neu khong co thi chuyen sang doi tuong khac
+                    {
+                        continue;
+                    }
 
                     ws.Cells[i, colWrite].value = tempObject.qtySum;
                     ws.Cells[i + 1, colWrite].value = tempObject.qtyErrorSum;
 
-
+                    //Dinh dang lai file
                     ws.Cells[i, colWrite].Borders[Excel.XlBordersIndex.xlDiagonalUp].LineStyle = Excel.XlLineStyle.xlLineStyleNone; ;
                     ws.Cells[i + 1, colWrite].Borders[Excel.XlBordersIndex.xlDiagonalUp].LineStyle = Excel.XlLineStyle.xlLineStyleNone;
 
