@@ -29,6 +29,12 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             return RESULT.OK;
         }
 
+        /// <summary>
+        /// Thuc hien ghi du lieu cua TSB
+        /// </summary>
+        /// <param name="listTSB"></param>
+        /// <returns></returns>
+        /// CreatedBy: HoaiPT(06/03/2023)
         public static string WriteTSB1(List<DataTSB> listTSB)
         {
             Excel.Application app = null;
@@ -43,8 +49,8 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
                 ws = wb.Sheets["TOSIBA_1"];
 
-                int rowCurrent = 3;
-                listTSB = listTSB.OrderBy(o => o.item).ToList();
+                int rowCurrent = 3;//Dong du lieu bat dau  tu dong thu 3
+                listTSB = listTSB.OrderBy(o => o.item).ToList();//Thuc hien sap xep theo ten model
                 foreach (var item in listTSB)
                 {
                     ws.Cells[rowCurrent, "A"].value = item.item + item.cus;
@@ -114,9 +120,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                         ws.Cells[rowCurrent, 21].value = item.qty13Other;
                     }
 
-
-                    rowCurrent++;
-
+                    rowCurrent++;//Tang len dong tiep theo ma thoi
                 }
 
                 range = ws.Range["A3:W" + (rowCurrent)];
@@ -172,10 +176,10 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
                 return RESULT.OK;
             }
-            //catch (Exception ex)
-            //{
-            //    return string.Format(RESULT.ERROR_015_CATCH, "WriteTSB1", ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "WriteTSB1", ex.Message);
+            }
             finally
             {
                 if (range != null)
@@ -196,6 +200,12 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
             }
         }
+        /// <summary>
+        /// Thuc hien ghi du lieu cua Kyocera
+        /// </summary>
+        /// <param name="listKyocera"></param>
+        /// <returns></returns>
+        /// CreatedBy: HoaiPT(06/03/2023)
         public static string WriteKyocera1(List<DataKyocera> listKyocera)
         {
             Excel.Application app = null;
@@ -218,7 +228,6 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     ws.Cells[rowCurrent, "B"].value = item.qtySum;
                     ws.Cells[rowCurrent, "E"].value = 80;
 
-                    // int columnStart = 6;
                     if (item.qty1WeldFake != 0)
                     {
                         ws.Cells[rowCurrent, 6].value = item.qty1WeldFake;
@@ -282,7 +291,6 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                         ws.Cells[rowCurrent, 18].value = item.qty13Other;
                     }
 
-
                     rowCurrent++;
 
                 }
@@ -327,11 +335,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 ws.Cells[rowCurrent, "Q"].Formula = @"= SUM(Q3:Q" + (rowCurrent - 1) + ")";
                 ws.Cells[rowCurrent, "R"].Formula = @"= SUM(R3:R" + (rowCurrent - 1) + ")";
 
-
                 ws.Cells[rowCurrent, "D"].Formula = string.Format("=C{0}/B{0}*1000000", rowCurrent);
-
-
-
 
                 wb.Save();
 
@@ -340,10 +344,10 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
                 return RESULT.OK;
             }
-            //catch (Exception ex)
-            //{
-            //    return string.Format(RESULT.ERROR_015_CATCH, "WriteTSB1", ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "WriteKyocera1", ex.Message);
+            }
             finally
             {
                 if (range != null)
@@ -411,8 +415,6 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     {
                         ws.Cells[rowCurrent, 10].value = item.qty5TinSmall;
                     }
-
-
 
                     if (item.qty8Reverse != 0)
                     {
@@ -485,24 +487,18 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 ws.Cells[rowCurrent, "O"].Formula = @"= SUM(O3:O" + (rowCurrent - 1) + ")";
                 ws.Cells[rowCurrent, "P"].Formula = @"= SUM(P3:P" + (rowCurrent - 1) + ")";
 
-
-
                 ws.Cells[rowCurrent, "D"].Formula = string.Format("=C{0}/B{0}*1000000", rowCurrent);
 
-
-
-
                 wb.Save();
-
                 wb.Close();
                 app.Quit();
 
                 return RESULT.OK;
             }
-            //catch (Exception ex)
-            //{
-            //    return string.Format(RESULT.ERROR_015_CATCH, "WriteTSB1", ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "WriteFX", ex.Message);
+            }
             finally
             {
                 if (range != null)
@@ -523,8 +519,6 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
             }
         }
-
-
 
         public static string WriteHT(DataHT valueHT, string month)
         {
@@ -589,10 +583,10 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
                 return RESULT.OK;
             }
-            //catch (Exception ex)
-            //{
-            //    return string.Format(RESULT.ERROR_015_CATCH, "WriteTSB1", ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                return string.Format(RESULT.ERROR_015_CATCH, "WriteHT", ex.Message);
+            }
             finally
             {
                 if (range != null)
@@ -613,6 +607,12 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
             }
         }
+        /// <summary>
+        /// Thuc hien ghi du lieu cua Okidenki
+        /// </summary>
+        /// <param name="valueOkidenki"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
         public static string WriteOkidenki(DataOkidenki valueOkidenki, string month)
         {
             Excel.Application app = null;
@@ -685,11 +685,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     ws.Cells[rowCurrent, "T"].value = valueOkidenki.qty13Other;
                 }
 
-
-
-
                 wb.Save();
-
                 wb.Close();
                 app.Quit();
 
@@ -719,9 +715,13 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
             }
         }
-
-
-
+        
+        /// <summary>
+        /// Thuc hien ghi du lieu cua riso
+        /// </summary>
+        /// <param name="valueRiso"></param>
+        /// <param name="month"></param>
+        /// <returns></returns>
         public static string WriteRiso(DataRiso valueRiso, string month)
         {
             Excel.Application app = null;
@@ -795,10 +795,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
 
 
-
-
                 wb.Save();
-
                 wb.Close();
                 app.Quit();
 
@@ -931,7 +928,10 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
         }
 
-
+        /// <summary>
+        /// Thuc hien tao file tu teamplate
+        /// </summary>
+        /// <returns></returns>
         public static string CreateFile_2()
         {
             string currentPath = Directory.GetCurrentDirectory();
@@ -948,6 +948,11 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
             return RESULT.OK;
         }
+        /// <summary>
+        /// Thuc hien ghi du lieu cua Kyocrea
+        /// </summary>
+        /// <param name="listKyocrea"></param>
+        /// <returns></returns>
         public static string WriteKyocera_2(List<DataKyocera> listKyocrea)
         {
             Excel.Application app = null;
@@ -1168,7 +1173,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                             break;
                         }
                     }
-                    if(tempObject== null)//Neu khong co thi chuyen sang doi tuong khac
+                    if(tempObject.item== null)//Neu khong co thi chuyen sang doi tuong khac
                     {
                         continue;
                     }

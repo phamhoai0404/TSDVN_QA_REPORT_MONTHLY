@@ -33,5 +33,8 @@ namespace QA_REPORT_MONTHLY.MODEL
         public const string TYPE_ERROR_KHONG_HAN = "Không hàn";
         public const string TYPE_ERROR_NGUOC_HUONG = "Ngược hướng";
         public const string TYPE_ERROR_THIEU_THIEC = "Thiếu thiếc";
+
+
+        public const string TYPE_ERROR_LECH_LINH_KIEN = "Lệch linh kiện";
     }
 }

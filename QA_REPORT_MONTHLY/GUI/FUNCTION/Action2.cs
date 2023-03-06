@@ -56,6 +56,13 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
         }
 
+        /// <summary>
+        /// Thuc hien lay du lieu cu cua file excel
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="listKyocera"></param>
+        /// <returns></returns>
+        /// CreatedBy: HoaiPT(06/03/2023)
         public static string GetKyoceraOld(ActionInput2 info, ref List<DataKyocera> listKyocera)
         {
             Excel.Application app = null;
@@ -252,7 +259,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
             catch (Exception ex)
             {
-                return string.Format(RESULT.ERROR_015_CATCH, ex.Message);
+                return string.Format(RESULT.ERROR_015_CATCH, "GetKyoceraOld", ex.Message);
             }
             finally
             {
@@ -272,6 +279,12 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
         }
 
+        /// <summary>
+        /// Thuc hien xu ly du lieu
+        /// </summary>
+        /// <param name="listKyocrea"></param>
+        /// <returns></returns>
+        /// CreatedBy: HoaiPT(06/03/2023)
         public static string ExecuteKyocera(ref List<DataKyocera> listKyocrea)
         {
             try
@@ -282,9 +295,9 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     {
                         if (listKyocrea[i].item.Equals(listKyocrea[j].item))
                         {
-                            listKyocrea[i].Pus(listKyocrea[j]);
-                            listKyocrea.RemoveAt(j);
-                            j--;
+                            listKyocrea[i].Pus(listKyocrea[j]);//Cong them so luong
+                            listKyocrea.RemoveAt(j);//Xoa bo phan tu j
+                            j--;//lui lai 
                         }
                     }
                 }

@@ -376,6 +376,13 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
         }
 
+        /// <summary>
+        /// Thuc hien lay du lieu file TSB
+        /// </summary>
+        /// <param name="listData"></param>
+        /// <param name="listError"></param>
+        /// <param name="listTSB"></param>
+        /// <returns></returns>
         public static string GetTSB_3(List<DataFirst> listData, List<DataError> listError, ref List<DataTSB3> listTSB)
         {
             try
@@ -393,10 +400,10 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                         continue;
                     }
 
-                    long qtySum = listChildData.Where(p => p.model.Substring(0, 9).Equals(tempModel)).Sum(p => p.qty);
-                    int qtyErrorSum = listChildErr.Where(p => p.model.Substring(0, 9).Equals(tempModel)).Sum(p => p.qty);
+                    long qtySum = listChildData.Where(p => p.model.Substring(0, 9).Equals(tempModel)).Sum(p => p.qty);//Thuc hien lay so luong file loi
+                    int qtyErrorSum = listChildErr.Where(p => p.model.Substring(0, 9).Equals(tempModel)).Sum(p => p.qty);//Thuc hien lay loi
                    
-                    listTSB.Add(new DataTSB3(tempModel, qtySum,qtyErrorSum));
+                    listTSB.Add(new DataTSB3(tempModel, qtySum,qtyErrorSum));//Add vao list
                 }
 
                 
@@ -404,7 +411,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
             catch (Exception ex)
             {
-                return string.Format(RESULT.ERROR_015_CATCH, "GetTSB", ex.Message);
+                return string.Format(RESULT.ERROR_015_CATCH, "GetTSB 3", ex.Message);
             }
         }
 

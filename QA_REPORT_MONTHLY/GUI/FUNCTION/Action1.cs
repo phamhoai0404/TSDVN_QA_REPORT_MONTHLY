@@ -149,8 +149,6 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 }
             }
         }
-
-
         public static string OpenFileExcelError(ActionInput1 valueInput, ref List<DataError> listError)
         {
             Excel.Application app = null;
@@ -397,6 +395,14 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 return string.Format(RESULT.ERROR_015_CATCH, "GetTSB", ex.Message);
             }
         }
+        /// <summary>
+        /// Thuc hien lay du lieu cua Kyocera
+        /// </summary>
+        /// <param name="listData"></param>
+        /// <param name="listError"></param>
+        /// <param name="listKyocera"></param>
+        /// <returns></returns>
+        /// CreatedBy: HoaiPT(06/03/2023)
         public static string GetKyocera(List<DataFirst> listData, List<DataError> listError, ref List<DataKyocera> listKyocera)
         {
             try
@@ -416,7 +422,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
                     long qtySum = listChildData.Where(p => p.model == tempModel).Sum(p => p.qty);
 
-                    string tempCus = item.cusDetail.Substring(0, item.cusDetail.IndexOf("-"));
+                    string tempCus = item.cusDetail.Substring(0, item.cusDetail.IndexOf("-"));//Phan nay cat khac so voi cac loai cat khac nhau
                     listKyocera.Add(new DataKyocera(tempModel, tempCus, qtySum));
                 }
 
@@ -430,31 +436,31 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                         {
                             switch (item.nameError)
                             {
-                                case string s when s.Equals("Bắc cầu"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_BAC_CAU):
                                     itemKyocera.qty4BrightMake += item.qty;
                                     break;
-                                case string s when s.Equals("Bong, vỡ LK"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_BONG_VO_LK):
                                     itemKyocera.qty12Peel += item.qty;
                                     break;
-                                case string s when s.Equals("Dị vật"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_DI_VAT):
                                     itemKyocera.qty10OjectForeign += item.qty;
                                     break;
-                                case string s when s.Equals("Giả hàn"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_GIA_HAN):
                                     itemKyocera.qty1WeldFake += item.qty;
                                     break;
-                                case string s when s.Equals("Kênh, Nghiêng"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_KENH_NGHIENG):
                                     itemKyocera.qty3Warp += item.qty;
                                     break;
-                                case string s when s.Equals("Không hàn"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_KHONG_HAN):
                                     itemKyocera.qty1WeldFake += item.qty;
                                     break;
-                                case string s when s.Equals("Ngược hướng"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_NGUOC_HUONG):
                                     itemKyocera.qty8Reverse += item.qty;
                                     break;
-                                case string s when s.Equals("Thiếu thiếc"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_THIEU_THIEC):
                                     itemKyocera.qty5TinSmall += item.qty;
                                     break;
-                                case string s when s.Equals("Thừa, thiếu LK"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_THUA_THIEU_LK):
                                     if (item.typeThua == true)
                                     {
                                         itemKyocera.qty11ItemMiss += item.qty;
@@ -506,7 +512,6 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     }
 
                     long qtySum = listChildData.Where(p => p.model.Substring(0, 9) == tempModel).Sum(p => p.qty);
-
                     string tempCus = item.cusDetail.Substring(0, item.cusDetail.IndexOf(")", 2) + 1);
                     listFX.Add(new DataFX(tempModel, tempCus, qtySum));
                 }
@@ -521,31 +526,31 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                         {
                             switch (item.nameError)
                             {
-                                case string s when s.Equals("Bắc cầu"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_BAC_CAU):
                                     itemFX.qty4BrightMake += item.qty;
                                     break;
-                                case string s when s.Equals("Bong, vỡ LK"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_BONG_VO_LK):
                                     itemFX.qty12Peel += item.qty;
                                     break;
-                                case string s when s.Equals("Dị vật"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_DI_VAT):
                                     itemFX.qty10OjectForeign += item.qty;
                                     break;
-                                case string s when s.Equals("Giả hàn"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_GIA_HAN):
                                     itemFX.qty1WeldFake += item.qty;
                                     break;
-                                case string s when s.Equals("Kênh, Nghiêng"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_KENH_NGHIENG):
                                     itemFX.qty3Warp += item.qty;
                                     break;
-                                case string s when s.Equals("Không hàn"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_KHONG_HAN):
                                     itemFX.qty1WeldFake += item.qty;
                                     break;
-                                case string s when s.Equals("Ngược hướng"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_NGUOC_HUONG):
                                     itemFX.qty8Reverse += item.qty;
                                     break;
-                                case string s when s.Equals("Thiếu thiếc"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_THIEU_THIEC):
                                     itemFX.qty5TinSmall += item.qty;
                                     break;
-                                case string s when s.Equals("Thừa, thiếu LK"):
+                                case string s when s.Equals(MdlComment.TYPE_ERROR_THUA_THIEU_LK):
                                     if (item.typeThua == true)
                                     {
                                         itemFX.qty11ItemMiss += item.qty;
@@ -554,7 +559,6 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                                     {
                                         itemFX.qty13Other += item.qty;
                                     }
-
                                     break;
                                 default:
                                     itemFX.qty13Other += item.qty;
@@ -576,10 +580,17 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             }
             catch (Exception ex)
             {
-                return string.Format(RESULT.ERROR_015_CATCH, "GetKyocera", ex.Message);
+                return string.Format(RESULT.ERROR_015_CATCH, "FX", ex.Message);
             }
         }
 
+        /// <summary>
+        /// Thuc hien lay du lieu cua Hitachi
+        /// </summary>
+        /// <param name="listData"></param>
+        /// <param name="listError"></param>
+        /// <param name="valueHT"></param>
+        /// <returns></returns>
         public static string GetHT(List<DataFirst> listData, List<DataError> listError, ref DataHT valueHT)
         {
             try
@@ -591,23 +602,23 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     switch (item.nameError)
                     {
-                        case string s when s.Equals("Bắc cầu"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_BAC_CAU):
                             valueHT.qty4BrightMake += item.qty;
                             break;
-                        case string s when s.Equals("Giả hàn"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_GIA_HAN):
                             valueHT.qty1WeldFake += item.qty;
                             break;
-                        case string s when s.Equals("Kênh, Nghiêng"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_KENH_NGHIENG):
                             valueHT.qty3Warp += item.qty;
                             break;
-                        case string s when s.Equals("Không hàn"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_KHONG_HAN):
                             valueHT.qty1WeldFake += item.qty;
                             break;
-                        case string s when s.Equals("Ngược hướng"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_NGUOC_HUONG):
                             valueHT.qty8Reverse += item.qty;
                             break;
 
-                        case string s when s.Equals("Thừa, thiếu LK"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_THUA_THIEU_LK):
                             if (item.typeThua == true)
                             {
                                 valueHT.qty11ItemMiss += item.qty;
@@ -624,16 +635,20 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                     }
                 }
                 return RESULT.OK;
+
             }
             catch (Exception ex)
             {
                 return string.Format(RESULT.ERROR_015_CATCH, "GetHT", ex.Message);
             }
-            finally
-            {
-
-            }
         }
+        /// <summary>
+        /// Thuc  hien lay du lieu cua Okidenki
+        /// </summary>
+        /// <param name="listData"></param>
+        /// <param name="listError"></param>
+        /// <param name="valueOkidenki"></param>
+        /// <returns></returns>
         public static string GetOkidenki(List<DataFirst> listData, List<DataError> listError, ref DataOkidenki valueOkidenki)
         {
             try
@@ -645,31 +660,31 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     switch (item.nameError)
                     {
-                        case string s when s.Equals("Bắc cầu"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_BAC_CAU):
                             valueOkidenki.qty4BrightMake += item.qty;
                             break;
-                        case string s when s.Equals("Bong, vỡ LK"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_BONG_VO_LK):
                             valueOkidenki.qty12Peel += item.qty;
                             break;
-                        case string s when s.Equals("Dị vật"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_DI_VAT):
                             valueOkidenki.qty10OjectForeign += item.qty;
                             break;
-                        case string s when s.Equals("Giả hàn"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_GIA_HAN):
                             valueOkidenki.qty1WeldFake += item.qty;
                             break;
-                        case string s when s.Equals("Kênh, Nghiêng"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_KENH_NGHIENG):
                             valueOkidenki.qty3Warp += item.qty;
                             break;
-                        case string s when s.Equals("Không hàn"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_KHONG_HAN):
                             valueOkidenki.qty1WeldFake += item.qty;
                             break;
-                        case string s when s.Equals("Ngược hướng"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_NGUOC_HUONG):
                             valueOkidenki.qty8Reverse += item.qty;
                             break;
-                        case string s when s.Equals("Thiếu thiếc"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_THIEU_THIEC):
                             valueOkidenki.qty5TinSmall += item.qty;
                             break;
-                        case string s when s.Equals("Thừa, thiếu LK"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_THUA_THIEU_LK):
                             if (item.typeThua == true)
                             {
                                 valueOkidenki.qty11ItemMiss += item.qty;
@@ -696,6 +711,13 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
             }
         }
+        /// <summary>
+        /// Ghi du lieu cua Riso
+        /// </summary>
+        /// <param name="listData"></param>
+        /// <param name="listError"></param>
+        /// <param name="valueRiso"></param>
+        /// <returns></returns>
         public static string GetRISO(List<DataFirst> listData, List<DataError> listError, ref DataRiso valueRiso)
         {
             try
@@ -707,31 +729,31 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     switch (item.nameError)
                     {
-                        case string s when s.Equals("Bắc cầu"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_BAC_CAU):
                             valueRiso.qty4BrightMake += item.qty;
                             break;
-                        case string s when s.Equals("Bong, vỡ LK"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_BONG_VO_LK):
                             valueRiso.qty12Peel += item.qty;
                             break;
-                        case string s when s.Equals("Dị vật"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_DI_VAT):
                             valueRiso.qty10OjectForeign += item.qty;
                             break;
-                        case string s when s.Equals("Giả hàn"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_GIA_HAN):
                             valueRiso.qty1WeldFake += item.qty;
                             break;
-                        case string s when s.Equals("Kênh, Nghiêng"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_KENH_NGHIENG):
                             valueRiso.qty3Warp += item.qty;
                             break;
-                        case string s when s.Equals("Không hàn"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_KHONG_HAN):
                             valueRiso.qty1WeldFake += item.qty;
                             break;
-                        case string s when s.Equals("Ngược hướng"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_NGUOC_HUONG):
                             valueRiso.qty8Reverse += item.qty;
                             break;
-                        case string s when s.Equals("Thiếu thiếc"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_THIEU_THIEC):
                             valueRiso.qty5TinSmall += item.qty;
                             break;
-                        case string s when s.Equals("Thừa, thiếu LK"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_THUA_THIEU_LK):
                             if (item.typeThua == true)
                             {
                                 valueRiso.qty11ItemMiss += item.qty;
@@ -758,6 +780,14 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
             }
         }
+        /// <summary>
+        /// Lay du lieu cua JCM
+        /// </summary>
+        /// <param name="listData"></param>
+        /// <param name="listError"></param>
+        /// <param name="valueJCM"></param>
+        /// <returns></returns>
+        /// CreatedBy: HoaiPT(06/03/2023)
         public static string GetJCM(List<DataFirst> listData, List<DataError> listError, ref DataJCM valueJCM)
         {
             try
@@ -769,28 +799,28 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                 {
                     switch (item.nameError)
                     {
-                        case string s when s.Equals("Bắc cầu"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_BAC_CAU):
                             valueJCM.qty4BrightMake += item.qty;
                             break;
-                        case string s when s.Equals("Bong, vỡ LK"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_BONG_VO_LK):
                             valueJCM.qty12Peel += item.qty;
                             break;
-                        case string s when s.Equals("Dị vật"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_DI_VAT):
                             valueJCM.qty10OjectForeign += item.qty;
                             break;
-                        case string s when s.Equals("Giả hàn"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_GIA_HAN):
                             valueJCM.qty1WeldFake += item.qty;
                             break;
-                        case string s when s.Equals("Không hàn"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_KHONG_HAN):
                             valueJCM.qty1WeldFake += item.qty;
                             break;
-                        case string s when s.Equals("Ngược hướng"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_NGUOC_HUONG):
                             valueJCM.qty8Reverse += item.qty;
                             break;
-                        case string s when s.Equals("Thiếu thiếc"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_THIEU_THIEC):
                             valueJCM.qty5TinSmall += item.qty;
                             break;
-                        case string s when s.Equals("Thừa, thiếu LK"):
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_THUA_THIEU_LK):
                             if (item.typeThua == true)
                             {
                                 valueJCM.qty11ItemMiss += item.qty;
@@ -800,7 +830,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
                                 valueJCM.qty6ItemLack += item.qty;
                             }
                             break;
-                        case string s when s.Equals("Lệch linh kiện")://Phan nay khac voai cac phan khac
+                        case string s when s.Equals(MdlComment.TYPE_ERROR_LECH_LINH_KIEN)://Phan nay khac voai cac phan khac
                             valueJCM.qty14LechLK += item.qty;
                             break;
 
@@ -814,10 +844,6 @@ namespace QA_REPORT_MONTHLY.FUNCTION
             catch (Exception ex)
             {
                 return string.Format(RESULT.ERROR_015_CATCH, "GetJCM", ex.Message);
-            }
-            finally
-            {
-
             }
         }
     }

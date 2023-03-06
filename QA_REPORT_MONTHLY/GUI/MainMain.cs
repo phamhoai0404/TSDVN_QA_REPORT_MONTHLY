@@ -93,7 +93,7 @@ namespace GUI
         private void GetConfig(Dictionary<string, object> getConfig)
         {
             DataConfig.CONFIG_SOURCE_FILE_DATA = getConfig["SourceFileData"].ToString();
-         
+
             DataConfig.CONFIG_FILE_ERROR_SHEETNAME = getConfig["FileError_SheetName"].ToString();
             DataConfig.CONFIG_FILE_ERROR_PASSWORD = getConfig["FileError_Password"].ToString();
             DataConfig.CONFIG_FILE_TEMPLATE = getConfig["FileTemplate"].ToString();
@@ -103,7 +103,7 @@ namespace GUI
             DataConfig.CONFIG_3_COLUMM_MODEL = getConfig["3ColumnModel"].ToString();
 
             DataConfig.CONFIG_MONTH = DateTime.Now.AddMonths(-1).ToString("MM");
-            
+
             DataConfig.CONFIG_2_COLUMM_MODEL = getConfig["2ColumnMode"].ToString();
 
         }
@@ -144,8 +144,8 @@ namespace GUI
                 resultValue = Action1.OpenFileExcelData(this.inputAction1, sheetName, ref listData);
                 if (!resultValue.Equals(RESULT.OK))
                 {
-                    MessageBox.Show(resultValue, "Get Data File", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     MyFunction2.Skill_Process("Excel");
+                    MessageBox.Show(resultValue, "Get Data File", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -154,8 +154,8 @@ namespace GUI
                 resultValue = Action1.OpenFileExcelError(this.inputAction1, ref this.listError);
                 if (!resultValue.Equals(RESULT.OK))
                 {
-                    MessageBox.Show(resultValue, "Get File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     MyFunction2.Skill_Process("Excel");
+                    MessageBox.Show(resultValue, "Get File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -175,7 +175,7 @@ namespace GUI
                     return;
                 }
 
-                //Thuc hien lam file cua TSB
+                //Thuc hien ghi du lieu cua TSB
                 if (this.chkTSB.Checked == true)
                 {
                     this.updateLable("Thực hiện lấy dữ liệu TSB");
@@ -186,7 +186,7 @@ namespace GUI
                         MessageBox.Show(resultValue, "Get Action TSB", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    this.updateLable("Thực hiện ghi dữ liệu TSB");
+                    this.updateLable("Thực hiện ghi dữ liệu TSB...");
                     resultValue = ActionWrite.WriteTSB1(listTSB);
                     if (!resultValue.Equals(RESULT.OK))
                     {
@@ -195,6 +195,7 @@ namespace GUI
                     }
                 }
 
+                //Thuc hien ghi du lieu cua Kyocera
                 if (this.chkKyocera.Checked == true)
                 {
                     this.updateLable("Thực hiện lấy dữ liệu Kyocera");
@@ -205,7 +206,8 @@ namespace GUI
                         MessageBox.Show(resultValue, "Get Action Kyocera", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    this.updateLable("Thực hiện ghi dữ liệu Kyocera");
+
+                    this.updateLable("Thực hiện ghi dữ liệu Kyocera....");
                     resultValue = ActionWrite.WriteKyocera1(listKyocera);
                     if (!resultValue.Equals(RESULT.OK))
                     {
@@ -214,9 +216,10 @@ namespace GUI
                     }
                 }
 
+                //Thuc hien ghi du lieu cua FX
                 if (this.chkFX.Checked == true)
                 {
-                    this.updateLable("Thực hiện lấy dữ liệu Kyocera");
+                    this.updateLable("Thực hiện lấy dữ liệu FX");
                     List<DataFX> listFX = new List<DataFX>();
                     resultValue = Action1.GetFX(listData, listError, ref listFX);
                     if (!resultValue.Equals(RESULT.OK))
@@ -224,7 +227,7 @@ namespace GUI
                         MessageBox.Show(resultValue, "Get Action FX", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    this.updateLable("Thực hiện ghi dữ liệu FX");
+                    this.updateLable("Thực hiện ghi dữ liệu FX....");
                     resultValue = ActionWrite.WriteFX(listFX);
                     if (!resultValue.Equals(RESULT.OK))
                     {
@@ -232,10 +235,11 @@ namespace GUI
                         return;
                     }
                 }
+
+                //Thuc hien ghi du lieu cua Hitachi
                 if (this.chkHT.Checked == true)
                 {
                     this.updateLable("Thực hiện lấy dữ liệu Hitachi");
-
                     DataHT valueHT = new DataHT();
                     resultValue = Action1.GetHT(listData, listError, ref valueHT);
                     if (!resultValue.Equals(RESULT.OK))
@@ -243,18 +247,20 @@ namespace GUI
                         MessageBox.Show(resultValue, "Get Action HT", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    this.updateLable("Thực hiện ghi dữ liệu HT");
+
+                    this.updateLable("Thực hiện ghi dữ liệu Hitachi...");
                     resultValue = ActionWrite.WriteHT(valueHT, this.txtMonth.Text);
                     if (!resultValue.Equals(RESULT.OK))
                     {
-                        MessageBox.Show(resultValue, "Get Write FX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(resultValue, "Write HT", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
+
+                //Thuc hien ghi du lieu cua Okidenki
                 if (this.chkOkidenki.Checked == true)
                 {
                     this.updateLable("Thực hiện lấy dữ liệu OKIDENKI");
-
                     DataOkidenki valueOkidenki = new DataOkidenki();
                     resultValue = Action1.GetOkidenki(listData, listError, ref valueOkidenki);
                     if (!resultValue.Equals(RESULT.OK))
@@ -262,18 +268,20 @@ namespace GUI
                         MessageBox.Show(resultValue, "Get Action OKIDENKI", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    this.updateLable("Thực hiện ghi dữ liệu OKIDENKI");
+
+                    this.updateLable("Thực hiện ghi dữ liệu OKIDENKI...");
                     resultValue = ActionWrite.WriteOkidenki(valueOkidenki, this.txtMonth.Text);
                     if (!resultValue.Equals(RESULT.OK))
                     {
-                        MessageBox.Show(resultValue, "Get Write OKIDENKI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(resultValue, "Write OKIDENKI", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
+
+                //Thuc hien ghi du lieu cua Riso
                 if (this.chkRiso.Checked == true)
                 {
                     this.updateLable("Thực hiện lấy dữ liệu RISO");
-
                     DataRiso valueRiso = new DataRiso();
                     resultValue = Action1.GetRISO(listData, listError, ref valueRiso);
                     if (!resultValue.Equals(RESULT.OK))
@@ -281,22 +289,20 @@ namespace GUI
                         MessageBox.Show(resultValue, "Get Action RISO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    this.updateLable("Thực hiện ghi dữ liệu RISO");
+
+                    this.updateLable("Thực hiện ghi dữ liệu RISO...");
                     resultValue = ActionWrite.WriteRiso(valueRiso, this.txtMonth.Text);
                     if (!resultValue.Equals(RESULT.OK))
                     {
-                        MessageBox.Show(resultValue, "Get Write RISO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(resultValue, "Write RISO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
 
-
-
-
+                //Thuc hien ghi du lieu cua JCM
                 if (this.chkJCM.Checked == true)
                 {
                     this.updateLable("Thực hiện lấy dữ liệu JCM");
-
                     DataJCM valueRiso = new DataJCM();
                     resultValue = Action1.GetJCM(listData, listError, ref valueRiso);
                     if (!resultValue.Equals(RESULT.OK))
@@ -304,11 +310,11 @@ namespace GUI
                         MessageBox.Show(resultValue, "Get Action JCM", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    this.updateLable("Thực hiện ghi dữ liệu JCM");
+                    this.updateLable("Thực hiện ghi dữ liệu JCM....");
                     resultValue = ActionWrite.WriteJCM(valueRiso, this.txtMonth.Text);
                     if (!resultValue.Equals(RESULT.OK))
                     {
-                        MessageBox.Show(resultValue, "Get Write JCM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(resultValue, "Write JCM", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -366,7 +372,7 @@ namespace GUI
 
             this.txt2ColModel.Text = DataConfig.CONFIG_2_COLUMM_MODEL;
 
-            ////Du lieu test o day xoa di nha
+            //Du lieu test o day xoa di nha
             //this.txt2FileData.Text = @"P:\96. Share Data\99. Other\13. IT\HOAI\QA_REPORT\2023.01_Kyocera様月報 - CUT.xlsx";
             //this.txt2RowEnd.Text = "488";
             //this.txt2RowStart.Text = "411";
@@ -448,23 +454,26 @@ namespace GUI
                     MessageBox.Show(resultTemp, "Validate Input Action 2", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
                 this.updateLable("Lấy dữ liệu file Kyocera...");
                 List<DataKyocera> listKyocrea = new List<DataKyocera>();
                 resultTemp = Action2.GetKyoceraOld(this.valueInput2, ref listKyocrea);
                 if (!resultTemp.Equals(RESULT.OK))
                 {
+                    MyFunction2.Skill_Process("Excel");
                     MessageBox.Show(resultTemp, "Get Data Action 2", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                this.updateLable("Xử lý dữ liệu Kyocera....");
+
+                this.updateLable("Xử lý dữ liệu Kyocera");
                 resultTemp = Action2.ExecuteKyocera(ref listKyocrea);
                 if (!resultTemp.Equals(RESULT.OK))
                 {
                     MessageBox.Show(resultTemp, "Execute Data Kyocera", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                this.updateLable("Ghi dữ liệu Kyocera");
 
+                this.updateLable("Ghi dữ liệu Kyocera....");
                 resultTemp = ActionWrite.CreateFile_2();//Tao file
                 resultTemp = ActionWrite.WriteKyocera_2(listKyocrea);
                 if (!resultTemp.Equals(RESULT.OK))
@@ -472,6 +481,7 @@ namespace GUI
                     MessageBox.Show(resultTemp, "Write Kyocera", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
                 MessageBox.Show("Thực hiện tạo thành công KYOCERA ở file: " + DataConfig.CONFIG_FILE_RESULT, "Successful 2", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -480,10 +490,11 @@ namespace GUI
             }
             finally
             {
+                MyFunction2.Skill_Process("Excel");
                 this.actionButton(true);
+               
             }
         }
-
         private void btn3RefreshAll_Click(object sender, EventArgs e)
         {
             this.SetDataDefault_3();
@@ -493,7 +504,7 @@ namespace GUI
             this.txt3FileError.Clear();
             this.txt3ColWrite.Clear();
             this.txt3FileInput.Clear();
-            
+
         }
         private void SetDataDefault_3()
         {
@@ -538,6 +549,7 @@ namespace GUI
                 resultValue = Action3.CheckSheetName(this.valueInput3);
                 if (!resultValue.Equals(RESULT.OK))
                 {
+                    MyFunction2.Skill_Process("Excel");
                     MessageBox.Show(resultValue, "Error SheetName 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -548,6 +560,7 @@ namespace GUI
                 resultValue = Action3.OpenFileExcelData3(this.valueInput3, sheetName, ref listData);
                 if (!resultValue.Equals(RESULT.OK))
                 {
+                    MyFunction2.Skill_Process("Excel");
                     MessageBox.Show(resultValue, "Get Data File 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -557,6 +570,7 @@ namespace GUI
                 resultValue = Action3.OpenFileExcelError(this.valueInput3, ref this.listError);
                 if (!resultValue.Equals(RESULT.OK))
                 {
+                    MyFunction2.Skill_Process("Excel");
                     MessageBox.Show(resultValue, "Get File Error 3", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
@@ -594,9 +608,7 @@ namespace GUI
                     return;
                 }
 
-
-                MessageBox.Show("Thực hiện ghi thành công TOSHIBA ở file: " + DataConfig.CONFIG_FILE_RESULT , "Successfull 3", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                MessageBox.Show("Thực hiện ghi thành công TOSHIBA ở file: " + DataConfig.CONFIG_FILE_RESULT, "Successfull 3", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -604,6 +616,7 @@ namespace GUI
             }
             finally
             {
+                MyFunction2.Skill_Process("Excel");
                 this.actionButton(true);
             }
         }
