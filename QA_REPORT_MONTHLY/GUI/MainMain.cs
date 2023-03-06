@@ -66,6 +66,17 @@ namespace GUI
         {
             try
             {
+                DialogResult dialogResult = MessageBox.Show("Bạn đã chắc chắn lưu lại toàn bộ file excel đang mở để tiếp tục chạy chương trình??? \n " +
+                                                             "Quá trình chạy chương trình bạn không được mở thao tác file excel!"
+                                                            , "Ask Excel", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.No)
+                {
+                    this.Close();
+                    return;
+                }
+
+                MyFunction2.Skill_Process("Excel");
+
 
                 Dictionary<string, object> getConfig = new Dictionary<string, object>();
                 string result = MyFunction2.GetDataConfig(@"CONFIG\config_qa_report_monthly.xlsx", ref getConfig);
