@@ -967,6 +967,7 @@ namespace QA_REPORT_MONTHLY.FUNCTION
 
                 ws = wb.Sheets["KYOCERA_2"];
 
+                listKyocrea = listKyocrea.OrderBy(o => o.item).ToList();
                 int rowCurrent = 3;
                 foreach (var item in listKyocrea)
                 {
